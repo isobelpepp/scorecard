@@ -11,8 +11,9 @@ test('Can click button to take you to a fresh scorecard', () => {
   render(<App />);
   const newGame = screen.getByText('New Game');
   fireEvent.click(newGame)
-  const us = screen.getByText('Us')
-  // const them = screen.getByText('Them')
-  expect(us).toBeInTheDocument()
+  const we = screen.getByText('We')
+  const they = screen.getByText('They')
+  expect(we).toBeInTheDocument()
+  expect(they).toBeInTheDocument()
 
 })
