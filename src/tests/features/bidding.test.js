@@ -20,3 +20,15 @@ test("Can click on 'they' to state 'they' made the bid", () => {
   const they = screen.getByText('They bid...')
   expect(they).toBeInTheDocument()
 });
+
+test("Can click on suit and number to bid", () => {
+  render(<App />);
+  const newGame = screen.getByText('New Game');
+  fireEvent.click(newGame)
+  const bidSuit = screen.getByTestId('hearts');
+  const bidNumber = screen.getByTestId('two')
+  fireEvent.click(bidSuit)
+  fireEvent.click(bidNumber)
+  const bid = screen.getByText('2 Hearts')
+  expect(bid).toBeInTheDocument()
+});
