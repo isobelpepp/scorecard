@@ -5,10 +5,10 @@ export const Scorecard = () => {
   return (
     <div className="w-50 container line-in-middle">
       <div className="row we-they">
-        <div className="col-sm content-left">
+        <div className="col-sm content-left" data-testid="we-column">
           We
         </div>
-        <div className="col-sm content-right">
+        <div className="col-sm content-right" data-testid="they-column">
           They
         </div>
       </div>

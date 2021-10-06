@@ -1,7 +1,8 @@
 import './App.css';
 import React from 'react';
 import { useState } from 'react';
-import Scorecard from './Scorecard'
+import Scorecard from './components/Scorecard'
+import Bidding from './components/Bidding'
 
 function App() {
   const [newGame, setNewGame] = useState(false);
@@ -18,6 +19,7 @@ function App() {
       </header>
       <button onClick={handleClick}>New Game</button>
       {newGame ? <Scorecard /> : null }
+      {newGame ? <Bidding /> : null}
     </div>
   );
 }

@@ -25,9 +25,10 @@ code {
   background-color: beige;
   border: 3px solid;
   border-color: black;
-  position: relative;
   min-height: 95vh;
   margin-top: 30px;
+  position: absolute;
+  left: 5em;
 }
 
 .line-in-middle {
@@ -45,16 +46,12 @@ code {
 .we-they {
   border-bottom: 2px solid;
   border-color: black;
-  margin-top: 30px;
-  margin-bottom: 15px;
   height: 5vh;
 }
 
 .above {
   border-bottom: 2px solid;
   border-color: black;
-  margin-top: 30px;
-  margin-bottom: 15px;
   height: 40vh
 }
 
@@ -62,12 +59,11 @@ code {
   height: 45vh
 }
 
-.row{
-  display: flex;
-  justify-content: space-between;
+.bidding{
+  min-height: 95vh;
+  min-width: 70vh;
+  position: absolute;
+  right: 5em;
+  background-color: white;
 }
-.col{
-  flex: 1 1;
-}   
-
 
