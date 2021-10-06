@@ -1,6 +1,7 @@
 import './App.css';
 import React from 'react';
 import { useState } from 'react';
+import Scorecard from './Scorecard'
 
 function App() {
   const [newGame, setNewGame] = useState(false);
@@ -16,7 +17,7 @@ function App() {
           <h1>Bridge Scorecard</h1>
       </header>
       <button onClick={handleClick}>New Game</button>
-      {newGame ? 'Us' : null}
+      {newGame ? <Scorecard /> : null }
     </div>
   );
 }
