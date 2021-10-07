@@ -19,5 +19,3 @@ test("Can submit the result of the hand", () => {
   expect(score).toBeInTheDocument()
 });
 
-
-// Enter how many tricks were won:

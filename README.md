@@ -1,6 +1,6 @@
 # Scorecard
 
-A simple one-page web app to help users keep track of their score in Bridge. I have played Bridge for years and have always found the socring element of it extremely confusing. This app solves that problem and does it for you!
+A simple one-page web app to help users keep track of their score in Bridge. I have played Bridge for years and have always found the scoring element of it extremely confusing. This app solves that problem and does it for you!
 
 ## User Stories
 
