@@ -1,10 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
-export const Bidding = () => {
+export const Bidding = (props) => {
   const [whoBid, setWhoBid] = useState('');
   const [suit, setSuit] = useState('');
   const [number, setNumber] = useState(0);
+  const [tricks, setTricks] = useState(0);
 
   const handleClick = (bid) =>  (event) => {
     event.preventDefault()
@@ -18,6 +20,15 @@ export const Bidding = () => {
   const handleNumber = (number) =>  (event) => {
     event.preventDefault()
       setNumber(number)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    props.submit(tricks);
+  }
+
+  const handleChange = (event) => {
+    setTricks({value: event.target.value});
   }
 
   return (
@@ -39,9 +50,19 @@ export const Bidding = () => {
       <button onClick={handleClick('Diamonds')} data-testid='diamonds'>Diamonds</button>
 
       <p>{suit !== '' && number !== 0 ? number + ' ' + suit : null}</p>
+
+      <h4>Tricks won:</h4>
+      <form data-testid='result' onSubmit={handleSubmit}>
+        <input type='number' data-testid='tricks-number' min="1" max="13" onChange={handleChange}/>
+        <input className="submit" type="submit" value="Submit" data-testid='submit' />
+      </form>
     </div>
   )
 }
 
+Bidding.propTypes = {
+  props: PropTypes.func,
+  submit: PropTypes.func
+};
 
 export default Bidding;

@@ -6,10 +6,16 @@ import Bidding from './components/Bidding'
 
 function App() {
   const [newGame, setNewGame] = useState(false);
+  const [tricks, setTricks] = useState(null);
 
   const handleClick = (event) => {
     event.preventDefault()
     setNewGame(true)
+  }
+
+  const submitTricks = (tricks) => {
+    setTricks(tricks.value)
+    console.log(tricks.value)
   }
 
   return (
@@ -18,8 +24,8 @@ function App() {
           <h1>Bridge Scorecard</h1>
       </header>
       <button onClick={handleClick}>New Game</button>
-      {newGame ? <Scorecard /> : null }
-      {newGame ? <Bidding /> : null}
+      {newGame ? <Scorecard tricks={tricks}/> : null }
+      {newGame ? <Bidding submit={submitTricks}/> : null}
     </div>
   );
 }

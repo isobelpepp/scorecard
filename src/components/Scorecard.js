@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export const Scorecard = () => {
+export const Scorecard = (props) => {
 
   return (
     <div className="w-50 container line-in-middle">
@@ -14,7 +15,7 @@ export const Scorecard = () => {
       </div>
       <div className="row above">
         <div className="col-sm content-left">
-          Above the line
+          {props.tricks ? props.tricks + ' tricks won!' : null }
         </div>
         <div className="col-sm content-right">
           Above the line
@@ -32,5 +33,10 @@ export const Scorecard = () => {
   )
 }
 
+
+Scorecard.propTypes = {
+  props: PropTypes.func,
+  tricks: PropTypes.string,
+};
 
 export default Scorecard;
