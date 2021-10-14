@@ -18,26 +18,24 @@ export const Scorecard = (props) => {
       </div>
       <div className="row above">
         <div className="col-sm content-left" data-testid="we-above-line">
-          { props.weScores.map((score, index) =>
+        </div>
+        <div className="col-sm content-right" data-testid="they-above-line">
+        </div>
+      </div>
+      <div className="row below">
+        <div className="col-sm content-left" data-testid="we-below-line">
+        { props.weScores.map((score, index) =>
             <li key={index} >
               {score}
             </li> )
           }
         </div>
-        <div className="col-sm content-right" data-testid="they-above-line">
+        <div className="col-sm content-right they-below-line">
         { props.theyScores.map((score, index) =>
             <li key={index}>
               {score}
             </li> )
           }
-        </div>
-      </div>
-      <div className="row below">
-        <div className="col-sm content-left" data-testid="we-below-line">
-          Below the line
-        </div>
-        <div className="col-sm content-right they-below-line">
-          Below the line
         </div>
       </div>
     </div>
