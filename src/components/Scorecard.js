@@ -30,7 +30,7 @@ export const Scorecard = (props) => {
             </li> )
           }
         </div>
-        <div className="col-sm content-right they-below-line">
+        <div className="col-sm content-right" data-testid="they-below-line">
         { props.theyScores.map((score, index) =>
             <li key={index}>
               {score}
