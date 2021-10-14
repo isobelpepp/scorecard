@@ -6,16 +6,16 @@ test("Can submit the result of the hand", () => {
   render(<App />);
   const newGame = screen.getByText('New Game');
   fireEvent.click(newGame)
-  const bidSuit = screen.getByTestId('hearts');
+  const whoBid = screen.getByTestId('we-button')
+  const bidSuit = screen.getByTestId('no-trumps');
   const bidNumber = screen.getByTestId('two')
+  fireEvent.click(whoBid)
   fireEvent.click(bidSuit)
   fireEvent.click(bidNumber)
   const input = screen.getByTestId('tricks-number')
-  userEvent.type(input, '8')
-  expect(input.value).toBe('8')
-  const submit = screen.getByTestId('submit')
+  userEvent.type(input, '2')
+  expect(input.value).toBe('2')
+  const submit = screen.getByTestId('submit-result')
   fireEvent.click(submit)
-  const score = screen.getByText('8 tricks won!')
-  expect(score).toBeInTheDocument()
+  expect(screen.getByTestId('we-above-line')).toHaveTextContent('70');
 });
-

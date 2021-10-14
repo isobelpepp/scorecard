@@ -1,21 +1,29 @@
 import './App.css';
 import React from 'react';
 import { useState } from 'react';
-import Scorecard from './components/Scorecard'
+import Scorecard from './components/Scorecard';
 import Bidding from './components/Bidding'
 
 function App() {
   const [newGame, setNewGame] = useState(false);
-  const [tricks, setTricks] = useState(null);
+  const [weScores, setWeScores] = useState([])
+  const [theyScores, setTheyScores] = useState([])
 
   const handleClick = (event) => {
     event.preventDefault()
     setNewGame(true)
   }
 
-  const submitTricks = (tricks) => {
-    setTricks(tricks.value)
-    console.log(tricks.value)
+  const submit = (whoBid, score) => {
+    if(whoBid === 'We') {
+      weScores.push(score)
+      let newWeScores = weScores
+      setWeScores([...newWeScores])
+    } else {
+      theyScores.push(score)
+      let newTheyScores = theyScores
+      setTheyScores([...newTheyScores])
+    }
   }
 
   return (
@@ -24,8 +32,8 @@ function App() {
           <h1>Bridge Scorecard</h1>
       </header>
       <button onClick={handleClick}>New Game</button>
-      {newGame ? <Scorecard tricks={tricks}/> : null }
-      {newGame ? <Bidding submit={submitTricks}/> : null}
+      {newGame ? <Scorecard weScores={weScores} theyScores={theyScores}/> : null }
+      {newGame ? <Bidding submit={submit} /> : null }
     </div>
   );
 }
