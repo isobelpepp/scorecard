@@ -1,11 +1,9 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import App from '../../App.js';
+import { screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import newGame from './newGame.js'
 
-const bid = () => {
-  render(<App />);
-  const newGame = screen.getByText('New Game');
-  fireEvent.click(newGame)
+const weBid = () => {
+  newGame()
   const whoBid = screen.getByTestId('we-button')
   const bidSuit = screen.getByTestId('no-trumps');
   const bidNumber = screen.getByTestId('two')
@@ -19,10 +17,4 @@ const bid = () => {
   fireEvent.click(submit)
 }
 
-// const newGame = () => {
-//   render(<App />);
-//   const newGame = screen.getByText('New Game');
-//   fireEvent.click(newGame)
-// }
-
-module.exports = bid
+module.exports = weBid

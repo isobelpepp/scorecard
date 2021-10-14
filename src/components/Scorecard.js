@@ -32,6 +32,7 @@ export const Scorecard = (props) => {
           }
         </div>
         <div className="col-sm content-right" data-testid="they-below-line">
+         <p data-testid='they-below-score'> Score below: {props.theyScores.reduce((a, b) => a + b, 0)}</p>
         { props.theyScores.map((score, index) =>
             <li key={index}>
               {score}
