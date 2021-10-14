@@ -1,12 +1,24 @@
 const scoring = (suitBid, numberBid, numberMade) => {
-  if(suitBid === 'NT' && numberBid <= numberMade) {
-    let total = (numberBid -1)*30
-    return total + 40
+  if(numberBid === numberMade) {
+    if(suitBid === 'NT') {
+      let total = (numberBid -1)*30
+      return total + 40
+    } else if (suitBuid(suitBid) === 'Major') {
+      return numberBid*30
+    } else {
+      return numberBid*20
+    }
+  } else {
+    return 'not accounted for yet'
   }
-//  under the line
-// NT - 40 for first trick, 30 for each trick after that
-// Major - 30 for each trick
-// Minor = 20 for each trick
 };
+
+const suitBuid = (suit) => {
+  if(suit === 'Hearts' || suit === 'Spades') {
+    return 'Major'
+  } else {
+    return 'Minor'
+  }
+}
 
 module.exports = scoring
