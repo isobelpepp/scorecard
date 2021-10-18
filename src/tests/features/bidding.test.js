@@ -1,5 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import App from '../../App.js';
+import { screen, fireEvent } from '@testing-library/react';
 import newGame from './helpers/newGame.js'
 
 test("Can click on 'we' to state 'we' made the bid", () => {

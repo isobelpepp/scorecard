@@ -30,8 +30,8 @@ export const Bidding = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    let score = scoring(suit, number, parseInt(tricks.value))
-    props.submit(whoBid, score)
+    let score = scoring(whoBid, suit, number, parseInt(tricks.value))
+    props.submit(score[0], score[1])
   }
 
   return (
