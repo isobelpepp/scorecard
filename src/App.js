@@ -6,23 +6,35 @@ import Bidding from './components/Bidding'
 
 function App() {
   const [newGame, setNewGame] = useState(false);
-  const [weScores, setWeScores] = useState([])
-  const [theyScores, setTheyScores] = useState([])
+  const [weAboveScores, setWeAboveScores] = useState([])
+  const [weBelowScores, setWeBelowScores] = useState([])
+  const [theyAboveScores, setTheyAboveScores] = useState([])
+  const [theyBelowScores, setTheyBelowScores] = useState([])
 
   const handleClick = (event) => {
     event.preventDefault()
     setNewGame(true)
   }
 
-  const submit = (whoBid, score) => {
+  const submit = (whoBid, scoreBelow, scoreAbove) => {
     if(whoBid === 'We') {
-      weScores.push(score)
-      let newWeScores = weScores
-      setWeScores([...newWeScores])
+      if(scoreAbove != null) {
+        weAboveScores.push(scoreAbove)
+        let newWeAboveScores = weAboveScores
+        setWeAboveScores([...newWeAboveScores])
+      } 
+      weBelowScores.push(scoreBelow)
+      let newWeBelowScores = weBelowScores
+      setWeBelowScores([...newWeBelowScores])
     } else {
-      theyScores.push(score)
-      let newTheyScores = theyScores
-      setTheyScores([...newTheyScores])
+      if(scoreAbove != null) {
+        theyAboveScores.push(scoreAbove)
+        let newTheyAboveScores = theyAboveScores
+        setTheyAboveScores([...newTheyAboveScores])
+      } 
+      theyBelowScores.push(scoreBelow)
+      let newTheyBelowScores = theyBelowScores
+      setTheyBelowScores([...newTheyBelowScores])
     }
   }
 
@@ -32,7 +44,8 @@ function App() {
           <h1>Bridge Scorecard</h1>
       </header>
       <button onClick={handleClick}>New Game</button>
-      {newGame ? <Scorecard weScores={weScores} theyScores={theyScores}/> : null }
+      {newGame ? <Scorecard weBelowScores={weBelowScores} theyBelowScores={theyBelowScores}
+      weAboveScores={weAboveScores} theyAboveScores={theyAboveScores}/> : null }
       {newGame ? <Bidding submit={submit} /> : null }
     </div>
   );

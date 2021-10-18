@@ -11,8 +11,8 @@ const theyBid = () => {
   fireEvent.click(bidSuit)
   fireEvent.click(bidNumber)
   const input = screen.getByTestId('tricks-number')
-  userEvent.type(input, '5')
-  expect(input.value).toBe('5')
+  userEvent.type(input, '11')
+  expect(input.value).toBe('11')
   const submit = screen.getByTestId('submit-result')
   fireEvent.click(submit)
 }

@@ -23,8 +23,8 @@ test('50 points are awarded for each un-doubled under-trick and not vulnerable (
   fireEvent.click(bidSuit)
   fireEvent.click(bidNumber)
   const input = screen.getByTestId('tricks-number')
-  userEvent.type(input, '2')
-  expect(input.value).toBe('2')
+  userEvent.type(input, '8')
+  expect(input.value).toBe('8')
   const submit = screen.getByTestId('submit-result')
   fireEvent.click(submit)
   expect(screen.getByTestId('they-below-line')).toHaveTextContent('50');
@@ -39,8 +39,8 @@ test('50 points are awarded for each un-doubled under-trick and not vulnerable (
   fireEvent.click(bidSuit)
   fireEvent.click(bidNumber)
   const input = screen.getByTestId('tricks-number')
-  userEvent.type(input, '3')
-  expect(input.value).toBe('3')
+  userEvent.type(input, '9')
+  expect(input.value).toBe('9')
   const submit = screen.getByTestId('submit-result')
   fireEvent.click(submit)
   expect(screen.getByTestId('we-below-line')).toHaveTextContent('150');
