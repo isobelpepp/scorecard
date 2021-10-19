@@ -28,7 +28,7 @@ describe('Defeated contract', () => {
   });
 });
 
-describe('Underbid', () => {
+describe('Underbid in NT and Major suits', () => {
   it('returns 30 above the line for each extra trick made in NT and Major suits', () => {
     let NT = scoring('We', 'NT', 4, 7)
     let hearts = scoring('They', 'Hearts', 5, 7)
@@ -36,5 +36,14 @@ describe('Underbid', () => {
     expect(NT).toEqual(['We', {below: 130, above: 90}])
     expect(hearts).toEqual(['They', {below: 150, above: 60}])
     expect(spades).toEqual(['They', {below: 30, above: 60}])
-  })
-})
+  });
+});
+
+describe('Underbid in Minor suits', () => {
+  it('returns 30 above the line for each extra trick made in NT and Major suits', () => {
+    let diamonds = scoring('We', 'diamonds', 5, 7)
+    let clubs = scoring('They', 'clubs', 1, 6)
+    expect(diamonds).toEqual(['We', {below: 100, above: 40}])
+    expect(clubs).toEqual(['They', {below: 20, above: 100}])
+  });
+});

@@ -21,9 +21,13 @@ const scoring = (whoBid, suitBid, numberBid, numberMade) => {
       let aboveScore = (numberMade - numberBid)*30
       return [whoBid, {'below': belowScore, 'above': aboveScore}]
     } else if (suit(suitBid) === 'Major') {
-      let above = (numberMade - numberBid)*30
-      let below = numberBid*30
-      return [whoBid, {'below': below, 'above': above}]
+      let majorAbove = (numberMade - numberBid)*30
+      let majorBelow = numberBid*30
+      return [whoBid, {'below': majorBelow, 'above': majorAbove}]
+    } else {
+      let minorAbove = (numberMade - numberBid)*20
+      let minorBelow = numberBid*20
+      return [whoBid, {'below': minorBelow, 'above': minorAbove}]
     }
   } else {
     return 'not accounted for yet'
