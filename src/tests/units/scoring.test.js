@@ -31,8 +31,10 @@ describe('Defeated contract', () => {
 describe('Underbid', () => {
   it('returns 30 above the line for each extra trick made in NT and Major suits', () => {
     let NT = scoring('We', 'NT', 4, 7)
-    // let hearts = scoring('They', 'Hearts', 5, 7)
-    // let spades = scoring('They', 'Spades', 1, 3)
-    expect(NT).toEqual(['We', {below: 90, above: 130}])
+    let hearts = scoring('They', 'Hearts', 5, 7)
+    let spades = scoring('They', 'Spades', 1, 3)
+    expect(NT).toEqual(['We', {below: 130, above: 90}])
+    expect(hearts).toEqual(['They', {below: 150, above: 60}])
+    expect(spades).toEqual(['They', {below: 30, above: 60}])
   })
 })

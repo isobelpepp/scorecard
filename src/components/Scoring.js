@@ -17,14 +17,19 @@ const scoring = (whoBid, suitBid, numberBid, numberMade) => {
     }
   } else if (numberBid < numberMade) {
     if(suitBid === 'NT') {
-      let aboveScore = ((numberBid - 1)*30) + 40
-      let belowScore = (numberMade - numberBid)*30
+      let belowScore = ((numberBid - 1)*30) + 40
+      let aboveScore = (numberMade - numberBid)*30
       return [whoBid, {'below': belowScore, 'above': aboveScore}]
+    } else if (suit(suitBid) === 'Major') {
+      let above = (numberMade - numberBid)*30
+      let below = numberBid*30
+      return [whoBid, {'below': below, 'above': above}]
     }
   } else {
     return 'not accounted for yet'
   }
 };
+
 
 const suit = (suit) => {
   if(suit === 'Hearts' || suit === 'Spades') {
