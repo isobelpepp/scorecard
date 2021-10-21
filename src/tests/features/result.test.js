@@ -27,7 +27,7 @@ test('50 points are awarded for each un-doubled under-trick and not vulnerable (
   expect(input.value).toBe('8')
   const submit = screen.getByTestId('submit-result')
   fireEvent.click(submit)
-  expect(screen.getByTestId('they-below-line')).toHaveTextContent('50');
+  expect(screen.getByTestId('they-above-line')).toHaveTextContent('50');
 });
 
 test('50 points are awarded for each un-doubled under-trick and not vulnerable (THEY)', () => {
@@ -43,5 +43,5 @@ test('50 points are awarded for each un-doubled under-trick and not vulnerable (
   expect(input.value).toBe('9')
   const submit = screen.getByTestId('submit-result')
   fireEvent.click(submit)
-  expect(screen.getByTestId('we-below-line')).toHaveTextContent('150');
+  expect(screen.getByTestId('we-above-line')).toHaveTextContent('150');
 })

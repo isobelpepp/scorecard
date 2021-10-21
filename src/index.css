@@ -50,6 +50,12 @@ code {
   height: 5vh;
 }
 
+.scores-games {
+  border-bottom: 2px dashed;
+  border-color: black;
+  height: 10vh;
+}
+
 .above {
   border-bottom: 2px solid;
   border-color: black;

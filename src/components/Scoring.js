@@ -11,9 +11,9 @@ const scoring = (whoBid, suitBid, numberBid, numberMade) => {
   } else if (numberBid > numberMade) {
     let score = (numberBid - numberMade)*50
     if(whoBid === 'We') {
-      return ['They', {'below': score, above: null}]
+      return ['They', {'below': null, above: score}]
     } else {
-      return ['We', {'below': score, above: null}]
+      return ['We', {'below': null, above: score}]
     }
   } else if (numberBid < numberMade) {
     if(suitBid === 'NT') {
