@@ -22,44 +22,76 @@ function App() {
 
   const submit = (whoBid, scoreBelow, scoreAbove) => {
     if(whoBid === 'We') {
-      if(scoreAbove != null) {
-        weAboveScores.push(scoreAbove)
-        let newWeAboveScores = weAboveScores
-        setWeAboveScores([...newWeAboveScores])
-      } 
-      weBelowScores.push(scoreBelow)
-      let newWeBelowScores = weBelowScores
-      setWeBelowScores([...newWeBelowScores])
-      weGameScores.push(scoreBelow)
-      let total = weGameScores.reduce((a, b) => a + b, 0) 
-        if(total >= 100) {
-          let weCurrentGames = weGames
-          weCurrentGames += 1
-          setWeGames(weCurrentGames)
-          setWeGameScores([])
-        } else {
-          setWeGameScores(weGameScores)
-        }
+      weScores(scoreBelow, scoreAbove)
     } else {
-      if(scoreAbove != null) {
-        theyAboveScores.push(scoreAbove)
-        let newTheyAboveScores = theyAboveScores
-        setTheyAboveScores([...newTheyAboveScores])
-      } 
-      theyBelowScores.push(scoreBelow)
-      let newTheyBelowScores = theyBelowScores
-      setTheyBelowScores([...newTheyBelowScores])
-      theyGameScores.push(scoreBelow)
-      let total = theyGameScores.reduce((a, b) => a + b, 0) 
-        if(total >= 100) {
-          let theyCurrentGames = theyGames
-          theyCurrentGames += 1
-          setTheyGames(theyCurrentGames)
-          setTheyGameScores([])
-        } else {
-          setTheyGameScores(theyGameScores)
-        }
+      theyScores(scoreBelow, scoreAbove)
     }
+  }
+
+  const weScores = (scoreBelow, scoreAbove) => {
+    if(scoreAbove != null) {
+      updateWeScoresAbove(scoreAbove)
+    } 
+    updateWeScoresBelow(scoreBelow)
+    updateWeGames(scoreBelow)
+  }
+
+  const theyScores = (scoreBelow, scoreAbove) => {
+    if(scoreAbove != null) {
+      updateTheyScoresAbove(scoreAbove)
+    } 
+    updateTheyScoresBelow(scoreBelow)
+    updateTheyGames(scoreBelow)
+  }
+
+  const updateWeGames = (scoreBelow) => {
+    weGameScores.push(scoreBelow)
+    let total = weGameScores.reduce((a, b) => a + b, 0) 
+    total >= 100 ? updateAndResetWeGames() : setWeGameScores(weGameScores)
+  }
+
+  const updateTheyGames = (scoreBelow) => {
+    theyGameScores.push(scoreBelow)
+    let total = theyGameScores.reduce((a, b) => a + b, 0) 
+    total >= 100 ? updateAndResetTheyGames() : setTheyGameScores(theyGameScores)
+  }
+
+  const updateWeScoresAbove = (scoreAbove) => {
+    weAboveScores.push(scoreAbove)
+    let newWeAboveScores = weAboveScores
+    setWeAboveScores([...newWeAboveScores])
+  }
+
+  const updateTheyScoresAbove = (scoreAbove) => {
+    theyAboveScores.push(scoreAbove)
+    let newTheyAboveScores = theyAboveScores
+    setTheyAboveScores([...newTheyAboveScores])
+  }
+
+  const updateWeScoresBelow = (scoreBelow) => {
+    weBelowScores.push(scoreBelow)
+    let newWeBelowScores = weBelowScores
+    setWeBelowScores([...newWeBelowScores])
+  }
+
+  const updateTheyScoresBelow = (scoreBelow) => {
+    theyBelowScores.push(scoreBelow)
+    let newTheyBelowScores = theyBelowScores
+    setTheyBelowScores([...newTheyBelowScores])
+  }
+
+  const updateAndResetWeGames = () => {
+    let weCurrentGames = weGames
+    weCurrentGames += 1
+    setWeGames(weCurrentGames)
+    setWeGameScores([])
+  }
+
+  const updateAndResetTheyGames = () => {
+    let theyCurrentGames = theyGames
+    theyCurrentGames += 1
+    setTheyGames(theyCurrentGames)
+    setTheyGameScores([])
   }
 
   return (
