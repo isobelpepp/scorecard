@@ -28,7 +28,7 @@ export const Scorecard = (props) => {
       </div>
       <div className="row scores-games">
         <div className="col-sm content-left" data-testid="we-scores">
-          <p>Games:</p>
+          <p>Games: {props.weGames}</p>
           <p data-testid='we-below-score'>Score: {weScore()} </p>
         </div>
         <div className="col-sm content-right" data-testid="they-scores">
@@ -80,6 +80,7 @@ Scorecard.propTypes = {
   theyBelowScores: PropTypes.array,
   weAboveScores: PropTypes.array,
   theyAboveScores: PropTypes.array,
+  weGames: PropTypes.number
 };
 
 export default Scorecard;

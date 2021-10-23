@@ -8,8 +8,7 @@ export const Bidding = (props) => {
   const [suit, setSuit] = useState('');
   const [number, setNumber] = useState(0);
   const [tricks, setTricks] = useState(0);
-
-
+  
   const handleClick = (bid) =>  (event) => {
     event.preventDefault()
     if(bid === 'We' || bid === 'They') {

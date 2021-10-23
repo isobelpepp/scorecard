@@ -20,7 +20,7 @@ describe('Bid and Made', () => {
 });
 
 describe('Defeated contract', () => {
-  it('returns 50 for the other pair for every undertrick', () => {
+  it('returns 50 above the line for the other pair for every undertrick', () => {
     let firstScore = scoring('We', 'NT', 5, 4)
     let secondScore = scoring('They', 'Hearts', 7, 3)
     expect(firstScore).toEqual(['They', {'below': null, 'above': 50}])

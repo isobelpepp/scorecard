@@ -10,6 +10,8 @@ function App() {
   const [weBelowScores, setWeBelowScores] = useState([])
   const [theyAboveScores, setTheyAboveScores] = useState([])
   const [theyBelowScores, setTheyBelowScores] = useState([])
+  const [weGameScores, setWeGameScores] = useState([])
+  const [weGames, setWeGames] = useState(0)
 
   const handleClick = (event) => {
     event.preventDefault()
@@ -26,6 +28,16 @@ function App() {
       weBelowScores.push(scoreBelow)
       let newWeBelowScores = weBelowScores
       setWeBelowScores([...newWeBelowScores])
+      weGameScores.push(scoreBelow)
+      let total = weGameScores.reduce((a, b) => a + b, 0) 
+        if(total >= 100) {
+          let weCurrentGames = weGames
+          weCurrentGames += 1
+          setWeGames(weCurrentGames)
+          setWeGameScores([])
+        } else {
+          setWeGameScores(weGameScores)
+        }
     } else {
       if(scoreAbove != null) {
         theyAboveScores.push(scoreAbove)
@@ -45,7 +57,7 @@ function App() {
       </header>
       <button onClick={handleClick}>New Game</button>
       {newGame ? <Scorecard weBelowScores={weBelowScores} theyBelowScores={theyBelowScores}
-      weAboveScores={weAboveScores} theyAboveScores={theyAboveScores}/> : null }
+      weAboveScores={weAboveScores} theyAboveScores={theyAboveScores} weGames={weGames}/> : null }
       {newGame ? <Bidding submit={submit} /> : null }
     </div>
   );
