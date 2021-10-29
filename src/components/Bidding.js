@@ -8,11 +8,14 @@ export const Bidding = (props) => {
   const [suit, setSuit] = useState('');
   const [number, setNumber] = useState(0);
   const [tricks, setTricks] = useState(0);
+  const [doubled, setDoubled] = useState(null)
   
   const handleClick = (bid) =>  (event) => {
     event.preventDefault()
     if(bid === 'We' || bid === 'They') {
       setWhoBid(bid)
+    } else if (bid === 'Doubled'){
+      setDoubled(true)
     } else {
       setSuit(bid)
     }
@@ -30,8 +33,13 @@ export const Bidding = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     let numberMade = parseInt(tricks.value) - 6
-    let score = scoring(whoBid, suit, number, numberMade)
-    props.submit(score[0], score[1]['below'], score[1]['above'])
+    if(doubled) {
+      let score = scoring(whoBid, suit, number, numberMade, true)
+      props.submit(score[0], score[1]['below'], score[1]['above'])
+    } else {
+      let score = scoring(whoBid, suit, number, numberMade, false)
+      props.submit(score[0], score[1]['below'], score[1]['above'])
+    }
   }
 
   return (
@@ -51,8 +59,10 @@ export const Bidding = (props) => {
       <button onClick={handleClick('Clubs')} data-testid='clubs'>Clubs</button>
       <button onClick={handleClick('Diamonds')} data-testid='diamonds'>Diamonds</button>
       <button onClick={handleClick('NT')} data-testid='no-trumps'>No Trumps</button>
+      <button onClick={handleClick('Doubled')} data-testid='doubled'>Doubled</button>
 
       <p>{suit !== '' && number !== 0 ? number + ' ' + suit : null}</p>
+      <p> { doubled ? 'Doubled' : null} </p>
 
       <h4>Tricks won:</h4>
       <form data-testid='result' onSubmit={handleSubmit}>
@@ -66,6 +76,8 @@ export const Bidding = (props) => {
 Bidding.propTypes = {
   props: PropTypes.func,
   submit: PropTypes.func,
+  weGames: PropTypes.number,
+  theyGames: PropTypes.number,
 };
 
 export default Bidding;

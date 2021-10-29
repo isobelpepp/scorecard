@@ -102,7 +102,7 @@ function App() {
       <button onClick={handleClick}>New Game</button>
       {newGame ? <Scorecard weBelowScores={weBelowScores} theyBelowScores={theyBelowScores}
       weAboveScores={weAboveScores} theyAboveScores={theyAboveScores} weGames={weGames} theyGames={theyGames}/> : null }
-      {newGame ? <Bidding submit={submit} /> : null }
+      {newGame ? <Bidding submit={submit} weGames={weGames} theyGames={theyGames}/> : null }
     </div>
   );
 }
