@@ -4,7 +4,7 @@ const scoring = (whoBid, suitBid, numberBid, numberMade, doubled) => {
   } else if (numberBid > numberMade) {
     return overbid(whoBid, numberBid, numberMade)
   } else {
-    return underbid(whoBid, suitBid, numberBid, numberMade)
+    return underbid(whoBid, suitBid, numberBid, numberMade, doubled)
   }
   }
 
@@ -17,28 +17,29 @@ const suit = (suit) => {
 }
 
  const bidAndMade = (whoBid, chosenSuit, bid, doubled) => {
-  if(chosenSuit === 'NT') {
-    if(doubled){
-      let total = ((bid - 1)*60) + 80
-      return [whoBid, {'below': total, 'above': null}]
-    } else {
-      let total = ((bid - 1)*30) + 40
-      return [whoBid, {'below': total, 'above': null}]
-    }
+  if(doubled) {
+    return doubledBidAndMade(whoBid, chosenSuit, bid)
+  } else if(chosenSuit === 'NT') {
+    let total = ((bid - 1)*30) + 40
+    return [whoBid, {'below': total, 'above': null}]
   } else if (suit(chosenSuit) === 'Major') {
-    if(doubled) {
-      return [whoBid, {'below': bid*60, 'above': null}]
-    } else {
-      return [whoBid, {'below': bid*30, 'above': null}]
-    }
+    return [whoBid, {'below': bid*30, 'above': null}]
   } else {
-    if(doubled) {
-      return [whoBid, {'below': bid*40, 'above': null}]
-    } else {
-      return [whoBid, {'below': bid*20, 'above': null}]
-    }
+    return [whoBid, {'below': bid*20, 'above': null}]
   }
  }
+
+ const doubledBidAndMade = (whoBid, chosenSuit, bid) => {
+  if(chosenSuit === 'NT') {
+    let total = ((bid - 1)*60) + 80
+    return [whoBid, {'below': total, 'above': null}]
+    return true
+  } else if (suit(chosenSuit) === 'Major') {
+      return [whoBid, {'below': bid*60, 'above': null}]
+  } else {
+    return [whoBid, {'below': bid*40, 'above': null}]
+  }
+}
 
  const overbid = (whoBid, bid, made) => {
   let score = (bid - made)*50
@@ -49,8 +50,10 @@ const suit = (suit) => {
   }
  }
 
- const underbid = (whoBid, suitBid, bid, made) => {
-  if (suit(suitBid) === 'Major') {
+ const underbid = (whoBid, suitBid, bid, made, doubled) => {
+  if(doubled) {
+    return underbidDoubled(whoBid, suitBid, bid, made)
+  } else if (suit(suitBid) === 'Major') {
     let majorAbove = (made- bid)*30
     let majorBelow = bid*30
     return [whoBid, {'below': majorBelow, 'above': majorAbove}]
@@ -64,5 +67,21 @@ const suit = (suit) => {
     return [whoBid, {'below': minorBelow, 'above': minorAbove}]
   }
  }
+
+const underbidDoubled = (whoBid, suitBid, bid, made) => {
+  if (suit(suitBid) === 'Major') {
+    let majorAbove = (made - bid)*100
+    let majorBelow = bid*60
+    return [whoBid, {'below': majorBelow, 'above': majorAbove}]
+  } else if (suitBid === 'NT') {
+    let belowScore = ((bid - 1)*60) + 80
+    let aboveScore = (made- bid)*100
+    return [whoBid, {'below': belowScore, 'above': aboveScore}]
+  } else {
+    let minorAbove = (made- bid)*100
+    let minorBelow = bid*40
+    return [whoBid, {'below': minorBelow, 'above': minorAbove}]
+  }
+}
 
 module.exports = scoring
