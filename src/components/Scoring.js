@@ -44,8 +44,8 @@ const suit = (suit) => {
 
 const overbid = (whoBid, bid, made, doubled) => {
   let score = (bid - made)*50
-  if(doubled === 'doubled') {
-    return defeatedContractDoubled(whoBid, bid, made)
+  if(doubled === 'doubled' || doubled === 'redoubled') {
+    return defeatedContractDoubled(whoBid, bid, made, doubled)
   } else if (whoBid === 'We') {
     return ['They', {'below': null, above: score}]
   } else {
@@ -53,11 +53,20 @@ const overbid = (whoBid, bid, made, doubled) => {
   }
  }
 
- const defeatedContractDoubled = (whoBid, bid, made) => {
+ const defeatedContractDoubled = (whoBid, bid, made, doubled) => {
     if(whoBid === 'We') {
-      return ['They', {'below': null, above: addScore(bid, made)}]
+      if(doubled === 'doubled') {
+        return ['They', {'below': null, above: addScore(bid, made)}]
+      } else {
+        let total = (addScore(bid, made))*2
+        return ['They', {'below': null, above: total}]
+      }
     } else {
-      return ['We', {'below': null, above: addScore(bid, made)}]
+      if(doubled === 'doubled') {
+        return ['We', {'below': null, above: addScore(bid, made)}]
+      } else {
+        return ['We', {'below': null, above: (addScore(bid, made))*2}]
+      }
     }
   }
 
