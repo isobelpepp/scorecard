@@ -1,6 +1,6 @@
-const scoring = (whoBid, suitBid, numberBid, numberMade) => {
+const scoring = (whoBid, suitBid, numberBid, numberMade, doubled) => {
   if(numberBid === numberMade) {
-    return bidAndMade(whoBid, suitBid, numberBid)
+    return bidAndMade(whoBid, suitBid, numberBid, doubled)
   } else if (numberBid > numberMade) {
     return overbid(whoBid, numberBid, numberMade)
   } else {
@@ -16,14 +16,27 @@ const suit = (suit) => {
   }
 }
 
- const bidAndMade = (whoBid, chosenSuit, bid) => {
+ const bidAndMade = (whoBid, chosenSuit, bid, doubled) => {
   if(chosenSuit === 'NT') {
-    let total = (bid - 1)*30
-    return [whoBid, {'below': total + 40, 'above': null}]
+    if(doubled){
+      let total = ((bid - 1)*60) + 80
+      return [whoBid, {'below': total, 'above': null}]
+    } else {
+      let total = ((bid - 1)*30) + 40
+      return [whoBid, {'below': total, 'above': null}]
+    }
   } else if (suit(chosenSuit) === 'Major') {
-    return [whoBid, {'below': bid*30, 'above': null}]
+    if(doubled) {
+      return [whoBid, {'below': bid*60, 'above': null}]
+    } else {
+      return [whoBid, {'below': bid*30, 'above': null}]
+    }
   } else {
-    return [whoBid, {'below': bid*20, 'above': null}]
+    if(doubled) {
+      return [whoBid, {'below': bid*40, 'above': null}]
+    } else {
+      return [whoBid, {'below': bid*20, 'above': null}]
+    }
   }
  }
 
