@@ -1,6 +1,6 @@
 import { screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import newGame from './helpers/newGame.js'
+import newGame from '../helpers/newGame.js'
 
 test('Doubled underbid, not vulnerable in NT', () => {
   newGame()
