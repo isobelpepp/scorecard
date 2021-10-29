@@ -37,3 +37,18 @@ describe('Doubled contracts - underbid, not vulnerable', () => {
     expect(clubsScore[1]).toEqual({'below': 240, 'above': 100})
   })
 })
+
+describe('Doubled and DEFEATED contracts, not vulnerable', () => {
+  it('100 for 1st trick, 200 for 2nd and 3rd and 300 for every other trick lost', () => {
+    let score = scoring('We', 'NT', 7, 1, true)
+    let heartsScore = scoring('They', 'Hearts', 6, 2, true)
+    let spadesScore = scoring('They', 'Spades', 6, 3, true)
+    let diamondsScore = scoring('They', 'Diamonds', 4, 2, true)
+    let clubsScore = scoring('They', 'Clubs', 2, 1, true)
+    expect(score).toEqual(['They', {'below': null, 'above': 1400}])
+    expect(heartsScore).toEqual(['We', {'below': null, 'above': 800}])
+    expect(spadesScore[1].above).toEqual(500)
+    expect(diamondsScore[1].above).toEqual(300)
+    expect(clubsScore[1].above).toEqual(100)
+  })
+})

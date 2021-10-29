@@ -2,7 +2,7 @@ const scoring = (whoBid, suitBid, numberBid, numberMade, doubled) => {
   if(numberBid === numberMade) {
     return bidAndMade(whoBid, suitBid, numberBid, doubled)
   } else if (numberBid > numberMade) {
-    return overbid(whoBid, numberBid, numberMade)
+    return overbid(whoBid, numberBid, numberMade, doubled)
   } else {
     return underbid(whoBid, suitBid, numberBid, numberMade, doubled)
   }
@@ -41,13 +41,32 @@ const suit = (suit) => {
   }
 }
 
- const overbid = (whoBid, bid, made) => {
+const overbid = (whoBid, bid, made, doubled) => {
   let score = (bid - made)*50
-  if(whoBid === 'We') {
+  if(doubled) {
+    return defeatedContractDoubled(whoBid, bid, made)
+  } else if (whoBid === 'We') {
     return ['They', {'below': null, above: score}]
   } else {
     return ['We', {'below': null, above: score}]
   }
+ }
+
+ const defeatedContractDoubled = (whoBid, bid, made) => {
+    if(whoBid === 'We') {
+      return ['They', {'below': null, above: addScore(bid, made)}]
+    } else {
+      return ['We', {'below': null, above: addScore(bid, made)}]
+    }
+  }
+
+
+ const addScore = (bid, made) => {
+  let score = 0
+  for (let i = 0; i < bid - made; i++) {
+    i === 0 ? score += 100 : i === 1 || i === 2 ? score += 200 : score += 300
+  }
+  return score
  }
 
  const underbid = (whoBid, suitBid, bid, made, doubled) => {
