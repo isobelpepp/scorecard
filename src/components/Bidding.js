@@ -34,7 +34,7 @@ export const Bidding = (props) => {
     event.preventDefault()
     let numberMade = parseInt(tricks.value) - 6
     if(doubled) {
-      let score = scoring(whoBid, suit, number, numberMade, true)
+      let score = scoring(whoBid, suit, number, numberMade, 'doubled')
       props.submit(score[0], score[1]['below'], score[1]['above'])
     } else {
       let score = scoring(whoBid, suit, number, numberMade, false)
