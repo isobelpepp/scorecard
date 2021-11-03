@@ -1,25 +1,16 @@
-import theyBid from './helpers/theyBid.js'
-import { screen, fireEvent } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import newGame from './helpers/newGame.js'
+import { screen } from '@testing-library/react';
+import submit from './helpers/submit';
+import bid from './helpers/bid';
 
-test("They can submit result of bid and made and it is reflected in scorecard", () => {
-  theyBid()
+test("THEY can submit result of bid and made and it is reflected in scorecard", () => {
+  bid('they-button', 'hearts', 'five', '11')
+  submit()
   expect(screen.getByTestId('they-scores')).toHaveTextContent('Games: 1');
 });
 
-test("They can submit result of bid and made and it is reflected in scorecard", () => {
-  newGame()
-  const whoBid = screen.getByTestId('we-button')
-  const bidSuit = screen.getByTestId('no-trumps');
-  const bidNumber = screen.getByTestId('six')
-  fireEvent.click(whoBid)
-  fireEvent.click(bidSuit)
-  fireEvent.click(bidNumber)
-  const input = screen.getByTestId('tricks-number')
-  userEvent.type(input, '12')
-  expect(input.value).toBe('12')
-  const submit = screen.getByTestId('submit-result')
-  fireEvent.click(submit)
+test("WE can submit result of bid and made and it is reflected in scorecard", () => {
+  bid('we-button', 'no-trumps', 'five', '11')
+  submit()
   expect(screen.getByTestId('we-scores')).toHaveTextContent('Games: 1');
   });
+  

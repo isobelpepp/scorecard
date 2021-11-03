@@ -1,60 +1,28 @@
-import { screen, fireEvent } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import newGame from '../helpers/newGame.js'
+import { screen } from '@testing-library/react';
+import submit from '../helpers/submit';
+import doubled from '../helpers/doubled';
+import bid from '../helpers/bid';
 
 test('Doubled underbid, not vulnerable in NT', () => {
-  newGame()
-  const whoBid = screen.getByTestId('we-button')
-  const bidSuit = screen.getByTestId('no-trumps');
-  const bidNumber = screen.getByTestId('five')
-  const doubled = screen.getByTestId('doubled')
-  fireEvent.click(whoBid)
-  fireEvent.click(bidSuit)
-  fireEvent.click(bidNumber)
-  fireEvent.click(doubled)
-  const input = screen.getByTestId('tricks-number')
-  userEvent.type(input, '13')
-  expect(input.value).toBe('13')
-  const submit = screen.getByTestId('submit-result')
-  fireEvent.click(submit)
-  expect(screen.getByTestId('we-below-line')).toHaveTextContent('320');
-  expect(screen.getByTestId('we-above-line')).toHaveTextContent('200');
+  bid('they-button', 'no-trumps', 'three', '11')
+  doubled()
+  submit()
+  expect(screen.getByTestId('they-below-line')).toHaveTextContent('200');
+  expect(screen.getByTestId('they-above-line')).toHaveTextContent('200');
 });
 
 test('Doubled underbid, not vulnerable in a major suit', () => {
-  newGame()
-  const whoBid = screen.getByTestId('they-button')
-  const bidSuit = screen.getByTestId('spades');
-  const bidNumber = screen.getByTestId('two')
-  const doubled = screen.getByTestId('doubled')
-  fireEvent.click(whoBid)
-  fireEvent.click(bidSuit)
-  fireEvent.click(bidNumber)
-  fireEvent.click(doubled)
-  const input = screen.getByTestId('tricks-number')
-  userEvent.type(input, '12')
-  expect(input.value).toBe('12')
-  const submit = screen.getByTestId('submit-result')
-  fireEvent.click(submit)
-  expect(screen.getByTestId('they-below-line')).toHaveTextContent('120');
-  expect(screen.getByTestId('they-above-line')).toHaveTextContent('400');
+  bid('we-button', 'hearts', 'three', '11')
+  doubled()
+  submit()
+  expect(screen.getByTestId('we-below-line')).toHaveTextContent('180');
+  expect(screen.getByTestId('we-above-line')).toHaveTextContent('200');
 });
 
 test('Doubled underbid, not vulnerable in a minor suit', () => {
-  newGame()
-  const whoBid = screen.getByTestId('we-button')
-  const bidSuit = screen.getByTestId('clubs');
-  const bidNumber = screen.getByTestId('two')
-  const doubled = screen.getByTestId('doubled')
-  fireEvent.click(whoBid)
-  fireEvent.click(bidSuit)
-  fireEvent.click(bidNumber)
-  fireEvent.click(doubled)
-  const input = screen.getByTestId('tricks-number')
-  userEvent.type(input, '9')
-  expect(input.value).toBe('9')
-  const submit = screen.getByTestId('submit-result')
-  fireEvent.click(submit)
+  bid('we-button', 'clubs', 'two', '9')
+  doubled()
+  submit()
   expect(screen.getByTestId('we-below-line')).toHaveTextContent('80');
   expect(screen.getByTestId('we-above-line')).toHaveTextContent('100');
 });
