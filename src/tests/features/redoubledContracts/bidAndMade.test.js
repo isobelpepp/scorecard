@@ -2,12 +2,7 @@ import { screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import newGame from '../helpers/newGame.js'
 
-// const redoubled = () => {
-//   const redoubleBid = screen.getByTestId('redoubled')
-//   fireEvent.click(redoubleBid)
-// }
-
-test('Doubled bid and made NT', () => {
+test('Redoubled bid and made NT, NOT vulnerable', () => {
   newGame()
   const whoBid = screen.getByTestId('we-button')
   const bidSuit = screen.getByTestId('no-trumps');
@@ -25,7 +20,7 @@ test('Doubled bid and made NT', () => {
   expect(screen.getByTestId('we-below-line')).toHaveTextContent('640');
 });
 
-test('Doubled bid and made in a major suit', () => {
+test('Redoubled bid and made in a major suit, Not vulnerable', () => {
   newGame()
   const whoBid = screen.getByTestId('they-button')
   const bidSuit = screen.getByTestId('hearts');
@@ -44,7 +39,7 @@ test('Doubled bid and made in a major suit', () => {
 });
 
 
-test('Doubled bid and made in a minor suit', () => {
+test('Reoubled bid and made in a minor suit, NOT vulnerable', () => {
   newGame()
   const whoBid = screen.getByTestId('we-button')
   const bidSuit = screen.getByTestId('diamonds');

@@ -103,7 +103,7 @@ const underbidDoubled = (whoBid, suitBid, bid, made, doubled) => {
     if(doubled === 'doubled') {
       return [whoBid, {'below': majorBelow, 'above': majorAbove}]
     } else {
-      return [whoBid, {'below': majorBelow, 'above': majorAbove*2}]
+      return [whoBid, {'below': majorBelow*2, 'above': majorAbove*2}]
     }
   } else if (suitBid === 'NT') {
     let belowScore = ((bid - 1)*60) + 80
@@ -111,7 +111,7 @@ const underbidDoubled = (whoBid, suitBid, bid, made, doubled) => {
     if(doubled === 'doubled') {
       return [whoBid, {'below': belowScore, 'above': aboveScore}]
     } else {
-      return [whoBid, {'below': belowScore, 'above': aboveScore*2}]
+      return [whoBid, {'below': belowScore*2, 'above': aboveScore*2}]
     }
   } else {
     let minorAbove = (made- bid)*100
@@ -119,7 +119,7 @@ const underbidDoubled = (whoBid, suitBid, bid, made, doubled) => {
     if(doubled === 'doubled') {
       return [whoBid, {'below': minorBelow, 'above': minorAbove}]
     } else {
-      return [whoBid, {'below': minorBelow, 'above': minorAbove*2}]
+      return [whoBid, {'below': minorBelow*2, 'above': minorAbove*2}]
     }
   }
 }
