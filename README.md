@@ -33,3 +33,55 @@ As a player
 So that I understand the scoring properly
 I would like an explanation of it by the scorecard
 ```
+
+Scoring:
+
+Bid and Made (below the line):
+  - Undoubled ✅
+  - Doubled ✅
+  - Redoubled ✅
+
+Overtricks (above the line):
+  - Undoubled ✅
+  - Doubled
+    - Not vulnerable ✅
+    - Vulnerable
+  - Redoubled
+    - Not vulnerable ✅
+    - Vulnerable
+
+Defeated contracts:
+  - Undoubled
+    - Not vulnerable ✅
+    - Vulnerable 
+  - Doubled
+    - Not vulnerable ✅
+    - Vulnerable
+  - Redoubled
+    - Not vulnerable ✅
+    - Vulnerable
+
+Slam Bonus:
+  - Small slam (not vulnerable) - 500 points
+  - Small slam (vulnerable) - 750 points
+  - Grand slam (not vulnerable) - 1000 points
+  - Grand slam (vulnarable) - 1500 points
+
+Doubled/Redoubled Bonus:
+  - Made contract doubled (50 points)
+  - Made contract redoubled (100 points)
+
+Honours Bonus:
+  - Four out of five trump suit honours (100 points)
+  - All five trump suit honours or all four aces in NT contract (150 points)
+
+Rubber Bonus:
+  - Completed rubber in two games (700 points)
+  - Completed rubber in three games (500 points)
+  - Unfinished rubber:
+    - 300 points if a side has won a game
+    - 50 points if one side has a part-score
+
+Final Score:
+  - Two games = rubber
+  - All points added up, whoever has the most wins
