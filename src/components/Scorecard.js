@@ -85,7 +85,3 @@ Scorecard.propTypes = {
 };
 
 export default Scorecard;
-
-
-// Score below: {props.weScores.reduce((a, b) => a + b, 0)}
-// Score below: {props.weScores.reduce((a, b) => a + b, 0)}
