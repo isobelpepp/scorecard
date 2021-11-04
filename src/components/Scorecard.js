@@ -30,10 +30,12 @@ export const Scorecard = (props) => {
         <div className="col-sm content-left" data-testid="we-scores">
           <p>Games: {props.weGames}</p>
           <p data-testid='we-below-score'>Score: {weScore()} </p>
+          <p> { props.weGames >= 1 ? 'Vulnerable' : null } </p>
         </div>
         <div className="col-sm content-right" data-testid="they-scores">
           <p>Games: {props.theyGames}</p>
           <p data-testid='they-below-score'> Score: {theyScore()}</p>
+          <p> { props.theyGames >= 1 ? 'Vulnerable' : null } </p>
         </div>
       </div>
       <div className="row above">
