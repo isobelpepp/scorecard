@@ -1,7 +1,12 @@
-import { screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import submit from '../helpers/submit';
 import doubled from '../helpers/doubled'
 import bid from '../helpers/bid';
+import App from '../../../App.js';
+
+beforeEach(() => {
+  render(<App />);
+});
 
 test('Doubled and defeated, not vulnerable in NT', () => {
   bid('we-button', 'no-trumps', 'three', '3')

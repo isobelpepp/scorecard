@@ -1,7 +1,12 @@
-import { screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import submit from '../helpers/submit';
 import redoubled from '../helpers/redoubled';
 import bid from '../helpers/bid';
+import App from '../../../App.js';
+
+beforeEach(() => {
+  render(<App />);
+});
 
 test('Redoubled bid and made NT, NOT vulnerable', () => {
   bid('they-button', 'no-trumps', 'five', '11')

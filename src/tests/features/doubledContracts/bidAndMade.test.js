@@ -1,7 +1,12 @@
-import { screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import submit from '../helpers/submit';
 import doubled from '../helpers/doubled';
 import bid from '../helpers/bid';
+import App from '../../../App.js';
+
+beforeEach(() => {
+  render(<App />);
+});
 
 test('Doubled bid and made NT', () => {
   bid('we-button', 'no-trumps', 'five', '11')

@@ -1,8 +1,11 @@
-import { screen, fireEvent } from '@testing-library/react';
-import newGame from './helpers/newGame.js'
+import { render, screen, fireEvent } from '@testing-library/react';
+import App from '../../App.js';
+
+beforeEach(() => {
+  render(<App />);
+});
 
 test("Can click on 'we' to state 'we' made the bid", () => {
-  newGame()
   const weBidButton = screen.getByTestId('we-button');
   fireEvent.click(weBidButton)
   const we = screen.getByText('We bid...')
@@ -10,7 +13,6 @@ test("Can click on 'we' to state 'we' made the bid", () => {
 });
 
 test("Can click on 'they' to state 'they' made the bid", () => {
-  newGame()
   const theyBidButton = screen.getByTestId('they-button');
   fireEvent.click(theyBidButton)
   const they = screen.getByText('They bid...')
@@ -18,7 +20,6 @@ test("Can click on 'they' to state 'they' made the bid", () => {
 });
 
 test("Can click on suit and number to bid", () => {
-  newGame()
   const bidSuit = screen.getByTestId('hearts');
   const bidNumber = screen.getByTestId('two')
   fireEvent.click(bidSuit)

@@ -39,8 +39,13 @@ export const Bidding = (props) => {
     event.preventDefault()
     let numberMade = parseInt(tricks.value) - 6
     if(doubled) {
-      let score = scoring(whoBid, suit, number, numberMade, 'doubled')
-      props.submit(score[0], score[1]['below'], score[1]['above'])
+      if((whoBid === 'We' && props.weGames >= 1) || whoBid === 'They' && props.theyGames >= 1) {
+        let score = scoring(whoBid, suit, number, numberMade, 'doubled', true)
+        props.submit(score[0], score[1]['below'], score[1]['above'])
+      } else {
+        let score = scoring(whoBid, suit, number, numberMade, 'doubled')
+        props.submit(score[0], score[1]['below'], score[1]['above'])
+      }
     } else if (redoubled){
       let score = scoring(whoBid, suit, number, numberMade, 'redoubled')
       props.submit(score[0], score[1]['below'], score[1]['above'])

@@ -1,10 +1,10 @@
-const scoring = (whoBid, suitBid, numberBid, numberMade, isDoubled) => {
+const scoring = (whoBid, suitBid, numberBid, numberMade, isDoubled, vulnerable) => {
   if(numberBid === numberMade) {
     return bidAndMade(whoBid, suitBid, numberBid, isDoubled)
   } else if (numberBid > numberMade) {
     return overbid(whoBid, numberBid, numberMade, isDoubled)
   } else {
-    return underbid(whoBid, suitBid, numberBid, numberMade, isDoubled)
+    return underbid(whoBid, suitBid, numberBid, numberMade, isDoubled, vulnerable)
   }
 }
 
@@ -72,10 +72,15 @@ const addScore = (bid, made) => {
   return score
 }
 
-const underbid = (whoBid, suitBid, bid, made, doubled) => {
+const underbid = (whoBid, suitBid, bid, made, doubled, vulnerable) => {
   if(doubled === 'doubled') {
-    return[whoBid, {above: underbidScoreAbove(suitBid, bid, made, doubled), 
-          below: bidAndMadeScore(suitBid, bid)*2}]
+    if(vulnerable) {
+      return[whoBid, {above: underbidScoreAbove(suitBid, bid, made, doubled)*2, 
+            below: bidAndMadeScore(suitBid, bid)*2}]
+    } else {
+      return[whoBid, {above: underbidScoreAbove(suitBid, bid, made, doubled), 
+        below: bidAndMadeScore(suitBid, bid)*2}]
+    }
   } else if(doubled === 'redoubled') {
     return[whoBid, {above: underbidScoreAbove(suitBid, bid, made, doubled), 
           below: bidAndMadeScore(suitBid, bid)*4}]

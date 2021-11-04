@@ -1,6 +1,11 @@
-import { screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import submit from './helpers/submit';
 import bid from './helpers/bid';
+import App from '../../App.js';
+
+beforeEach(() => {
+  render(<App />);
+});
 
 test("We can submit result of bid and made and it is reflected in scorecard", () => {
   bid('we-button', 'no-trumps', 'two', '8')
