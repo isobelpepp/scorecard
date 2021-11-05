@@ -45,7 +45,7 @@ Overtricks (above the line):
   - Undoubled ✅
   - Doubled
     - Not vulnerable ✅
-    - Vulnerable
+    - Vulnerable ✅
   - Redoubled
     - Not vulnerable ✅
     - Vulnerable

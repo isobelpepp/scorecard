@@ -19,17 +19,17 @@ describe('Redoubled contracts - underbid, VULNERABLE', () => {
   });
 });
 
-// describe('Redoubled and DEFEATED contracts, not vulnerable', () => {
-//   it('200 for 1st trick, 400 for 2nd and 3rd and 600 for every other trick lost', () => {
-//     let score = scoring('We', 'NT', 7, 1, 'redoubled')
-//     let heartsScore = scoring('They', 'Hearts', 6, 2, 'redoubled')
-//     let spadesScore = scoring('They', 'Spades', 6, 3, 'redoubled')
-//     let diamondsScore = scoring('They', 'Diamonds', 4, 2, 'redoubled')
-//     let clubsScore = scoring('They', 'Clubs', 2, 1, 'redoubled')
-//     expect(score).toEqual(['They', {'below': null, 'above': 2800}])
-//     expect(heartsScore).toEqual(['We', {'below': null, 'above': 1600}])
-//     expect(spadesScore[1].above).toEqual(1000)
-//     expect(diamondsScore[1].above).toEqual(600)
-//     expect(clubsScore[1].above).toEqual(200)
-//   })
-// })
+describe('Reoubled and DEFEATED contracts, VULNERABLE', () => {
+  it('400 for 1st trick, 600 for every trick after that', () => {
+    let score = scoring('We', 'NT', 7, 1, 'redoubled', true)
+    let heartsScore = scoring('They', 'Hearts', 6, 2, 'redoubled', true)
+    let spadesScore = scoring('They', 'Spades', 6, 3, 'redoubled', true)
+    let diamondsScore = scoring('They', 'Diamonds', 4, 2, 'redoubled', true)
+    let clubsScore = scoring('They', 'Clubs', 2, 1, 'redoubled', true)
+    expect(score).toEqual(['They', {'below': null, 'above': 3400}])
+    expect(heartsScore[1].above).toEqual(2200)
+    expect(spadesScore[1].above).toEqual(1600)
+    expect(diamondsScore[1].above).toEqual(1000)
+    expect(clubsScore[1].above).toEqual(400)
+  });
+});

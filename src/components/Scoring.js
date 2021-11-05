@@ -2,7 +2,7 @@ const scoring = (whoBid, suitBid, numberBid, numberMade, isDoubled, vulnerable) 
   if(numberBid === numberMade) {
     return bidAndMade(whoBid, suitBid, numberBid, isDoubled)
   } else if (numberBid > numberMade) {
-    return overbid(whoBid, numberBid, numberMade, isDoubled)
+    return overbid(whoBid, numberBid, numberMade, isDoubled, vulnerable)
   } else {
     return underbid(whoBid, suitBid, numberBid, numberMade, isDoubled, vulnerable)
   }
@@ -37,10 +37,10 @@ const bidAndMadeScore = (chosenSuit, bid) => {
   }
 }
 
-const overbid = (whoBid, bid, made, doubled) => {
+const overbid = (whoBid, bid, made, doubled, vulnerable) => {
   let score = (bid - made)*50
   if(doubled === 'doubled' || doubled === 'redoubled') {
-    return defeatedContractDoubled(whoBid, bid, made, doubled)
+    return defeatedContractDoubled(whoBid, bid, made, doubled, vulnerable)
   } else if (whoBid === 'We') {
     return ['They', {'below': null, above: score}]
   } else {
@@ -48,28 +48,36 @@ const overbid = (whoBid, bid, made, doubled) => {
   }
 }
 
-const defeatedContractDoubled = (whoBid, bid, made, doubled) => {
+const defeatedContractDoubled = (whoBid, bid, made, doubled, vulnerable) => {
   if(whoBid === 'We') {
     if(doubled === 'doubled') {
-      return ['They', {'below': null, above: addScore(bid, made)}]
+      return ['They', {'below': null, above: addScore(bid, made, vulnerable)}]
     } else {
-      return ['They', {'below': null, above: (addScore(bid, made))*2}]
+      return ['They', {'below': null, above: (addScore(bid, made, vulnerable))*2}]
     }
   } else {
     if(doubled === 'doubled') {
-      return ['We', {'below': null, above: addScore(bid, made)}]
+      return ['We', {'below': null, above: addScore(bid, made, vulnerable)}]
     } else {
-      return ['We', {'below': null, above: (addScore(bid, made))*2}]
+      return ['We', {'below': null, above: (addScore(bid, made, vulnerable))*2}]
     }
   }
 }
 
-const addScore = (bid, made) => {
-  let score = 0
-  for (let i = 0; i < bid - made; i++) {
-    i === 0 ? score += 100 : i === 1 || i === 2 ? score += 200 : score += 300
+const addScore = (bid, made, vulnerable) => {
+  if(vulnerable) {
+    let score = 0
+    for (let i = 0; i < bid - made; i++) {
+      i === 0 ? score += 200 : score += 300
+    }
+    return score
+  } else {
+    let score = 0
+    for (let i = 0; i < bid - made; i++) {
+      i === 0 ? score += 100 : i === 1 || i === 2 ? score += 200 : score += 300
+    }
+    return score
   }
-  return score
 }
 
 const underbid = (whoBid, suitBid, bid, made, doubled, vulnerable) => {
