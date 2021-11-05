@@ -32,7 +32,6 @@ test('Doubled underbid, not vulnerable in a minor suit gives 100 points above th
   expect(screen.getByTestId('we-above-line')).toHaveTextContent('100');
 });
 
-
 test('Doubled underbid, VULNERABLE in NT gives 200 points above the line for every overtrick', () => {
   bid('they-button', 'hearts', 'five', '11')
   submit()
@@ -42,16 +41,20 @@ test('Doubled underbid, VULNERABLE in NT gives 200 points above the line for eve
   expect(screen.getByTestId('they-above-line')).toHaveTextContent('800');
 });
 
-// test('Doubled underbid, VULNERABLE in a major suit gives 200 points above the line for every overtrick', () => {
-//   bid('we-button', 'hearts', 'two', '10')
-//   doubled()
-//   submit()
-//   expect(screen.getByTestId('we-above-line')).toHaveTextContent('400');
-// });
+test('Doubled underbid, VULNERABLE in a major suit gives 200 points above the line for every overtrick', () => {
+  bid('we-button', 'hearts', 'five', '11')
+  submit()
+  bid('we-button', 'hearts', 'two', '10')
+  doubled()
+  submit()
+  expect(screen.getByTestId('we-above-line')).toHaveTextContent('400');
+});
 
-// test('Doubled underbid, VULNERABLE in a minor suit gives 200 points above the line for every overtrick', () => {
-//   bid('we-button', 'diamonds', 'three', '10')
-//   doubled()
-//   submit()
-//   expect(screen.getByTestId('we-above-line')).toHaveTextContent('200');
-// });
+test('Doubled underbid, VULNERABLE in a minor suit gives 200 points above the line for every overtrick', () => {
+  bid('we-button', 'hearts', 'five', '11')
+  submit()
+  bid('we-button', 'diamonds', 'three', '10')
+  doubled()
+  submit()
+  expect(screen.getByTestId('we-above-line')).toHaveTextContent('200');
+});

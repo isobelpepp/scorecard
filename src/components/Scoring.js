@@ -82,8 +82,13 @@ const underbid = (whoBid, suitBid, bid, made, doubled, vulnerable) => {
         below: bidAndMadeScore(suitBid, bid)*2}]
     }
   } else if(doubled === 'redoubled') {
-    return[whoBid, {above: underbidScoreAbove(suitBid, bid, made, doubled), 
-          below: bidAndMadeScore(suitBid, bid)*4}]
+    if(vulnerable) {
+      return[whoBid, {above: underbidScoreAbove(suitBid, bid, made, doubled)*4, 
+            below: bidAndMadeScore(suitBid, bid)*4}]
+    } else {
+      return[whoBid, {above: underbidScoreAbove(suitBid, bid, made, doubled)*2, 
+            below: bidAndMadeScore(suitBid, bid)*4}]
+    }
   } else {
     return[whoBid, {above: underbidScoreAbove(suitBid, bid, made, doubled), 
           below: bidAndMadeScore(suitBid, bid)}]
@@ -92,10 +97,8 @@ const underbid = (whoBid, suitBid, bid, made, doubled, vulnerable) => {
 
 const underbidScoreAbove = (suitBid, bid, made, doubled) => {
   let overtricks = made - bid
-  if(doubled === 'doubled') {
+  if(doubled === 'doubled' || doubled === 'redoubled') {
     return overtricks*100
-  } else if (doubled === 'redoubled') {
-    return overtricks*200
   } else if (suitBid === 'NT' || suit(suitBid) === 'Major') {
     return overtricks*30
   } else {
