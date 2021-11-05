@@ -8,24 +8,23 @@ beforeEach(() => {
   render(<App />);
 });
 
-test('Doubled bid and made NT', () => {
-  bid('we-button', 'no-trumps', 'five', '11')
-  doubled()
-  submit()
-  expect(screen.getByTestId('we-below-line')).toHaveTextContent('320');
-});
-
-test('Doubled bid and made in a major suit', () => {
-  bid('they-button', 'hearts', 'three', '9')
-  doubled()
-  submit()
-  expect(screen.getByTestId('they-below-line')).toHaveTextContent('180');
-});
-
-
-test('Doubled bid and made in a minor suit', () => {
-  bid('we-button', 'diamonds', 'six', '12')
-  doubled()
-  submit()
-  expect(screen.getByTestId('we-below-line')).toHaveTextContent('240');
+describe('Doubled bid and made', () => {
+  test('NT', () => {
+    bid('we-button', 'no-trumps', 'five', '11')
+    doubled()
+    submit()
+    expect(screen.getByTestId('we-below-line')).toHaveTextContent('320');
+  });
+  test('Major suit', () => {
+    bid('they-button', 'hearts', 'three', '9')
+    doubled()
+    submit()
+    expect(screen.getByTestId('they-below-line')).toHaveTextContent('180');
+  });
+  test('Minor suit', () => {
+    bid('we-button', 'diamonds', 'six', '12')
+    doubled()
+    submit()
+    expect(screen.getByTestId('we-below-line')).toHaveTextContent('240');
+  });
 });

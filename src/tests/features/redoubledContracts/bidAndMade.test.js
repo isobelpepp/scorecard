@@ -8,23 +8,23 @@ beforeEach(() => {
   render(<App />);
 });
 
-test('Redoubled bid and made NT, NOT vulnerable', () => {
-  bid('they-button', 'no-trumps', 'five', '11')
-  redoubled()
-  submit()
-  expect(screen.getByTestId('they-below-line')).toHaveTextContent('640');
-});
-
-test('Redoubled bid and made in a major suit, Not vulnerable', () => {
-  bid('we-button', 'hearts', 'four', '10')
-  redoubled()
-  submit()
-  expect(screen.getByTestId('we-below-line')).toHaveTextContent('480');
-});
-
-test('Reoubled bid and made in a minor suit, NOT vulnerable', () => {
-  bid('we-button', 'diamonds', 'six', '12')
-  redoubled()
-  submit()
-  expect(screen.getByTestId('we-below-line')).toHaveTextContent('480');
+describe('Bid and made, vulnerable and not vulnerable', () => {
+  test('NT', () => {
+    bid('they-button', 'no-trumps', 'five', '11')
+    redoubled()
+    submit()
+    expect(screen.getByTestId('they-below-line')).toHaveTextContent('640');
+  });
+  test('Major suit', () => {
+    bid('we-button', 'hearts', 'four', '10')
+    redoubled()
+    submit()
+    expect(screen.getByTestId('we-below-line')).toHaveTextContent('480');
+  });
+  test('Minor suit', () => {
+    bid('we-button', 'diamonds', 'six', '12')
+    redoubled()
+    submit()
+    expect(screen.getByTestId('we-below-line')).toHaveTextContent('480');
+  });
 });
