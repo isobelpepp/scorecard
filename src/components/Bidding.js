@@ -46,7 +46,7 @@ export const Bidding = (props) => {
         let score = scoring(whoBid, suit, number, numberMade, 'doubled')
         props.submit(score[0], score[1]['below'], score[1]['above'])
       }
-    } else if (redoubled){
+    } else if (redoubled) {
       if((whoBid === 'We' && props.weGames >= 1) || (whoBid === 'They' && props.theyGames >= 1)) {
         let score = scoring(whoBid, suit, number, numberMade, 'redoubled', true)
         props.submit(score[0], score[1]['below'], score[1]['above'])
@@ -54,6 +54,9 @@ export const Bidding = (props) => {
         let score = scoring(whoBid, suit, number, numberMade, 'redoubled')
         props.submit(score[0], score[1]['below'], score[1]['above'])
       }
+    } else if ((whoBid === 'We' && props.weGames >= 1) || (whoBid === 'They' && props.theyGames >= 1)) {
+      let score = scoring(whoBid, suit, number, numberMade, false, true)
+      props.submit(score[0], score[1]['below'], score[1]['above'])
     } else {
       let score = scoring(whoBid, suit, number, numberMade, false)
       props.submit(score[0], score[1]['below'], score[1]['above'])

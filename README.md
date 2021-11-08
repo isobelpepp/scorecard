@@ -41,31 +41,40 @@ Bid and Made (below the line):
   - Doubled ✅
   - Redoubled ✅
 
-Overtricks (above the line):
+Overtricks (above the line): ✅
   - Undoubled ✅
-  - Doubled
+  - Doubled ✅
     - Not vulnerable ✅
     - Vulnerable ✅
-  - Redoubled
+  - Redoubled ✅
     - Not vulnerable ✅
-    - Vulnerable
+    - Vulnerable  ✅
 
 Defeated contracts:
   - Undoubled
     - Not vulnerable ✅
     - Vulnerable 
-  - Doubled
+  - Doubled ✅
     - Not vulnerable ✅
-    - Vulnerable
-  - Redoubled
+    - Vulnerable ✅
+  - Redoubled ✅
     - Not vulnerable ✅
-    - Vulnerable
+    - Vulnerable ✅
 
 Slam Bonus:
   - Small slam (not vulnerable) - 500 points
   - Small slam (vulnerable) - 750 points
   - Grand slam (not vulnerable) - 1000 points
   - Grand slam (vulnarable) - 1500 points
+
+(if you have game anyway then it will probably just go below the line)
+- if it takes you into rubber 
+  - Say 7 diamonds 
+  - Put 140 below, put 700 above for rubber in two
+
+- Do the points go above or below the line??
+- Do you get the points even if you haven't bid it?
+- As soon as someone gets 2 games is it over - do you start a new scoresheet??
 
 Doubled/Redoubled Bonus:
   - Made contract doubled (50 points)
@@ -80,8 +89,14 @@ Rubber Bonus:
   - Completed rubber in three games (500 points)
   - Unfinished rubber:
     - 300 points if a side has won a game
-    - 50 points if one side has a part-score
+    - 50 points if one side has a part-score (whoever has more points below)
 
 Final Score:
   - Two games = rubber
   - All points added up, whoever has the most wins
+
+
+Draw a line under the game and start a new game 
+
+
+Option to quit the game!!

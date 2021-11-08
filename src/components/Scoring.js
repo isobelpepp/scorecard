@@ -41,6 +41,10 @@ const overbid = (whoBid, bid, made, doubled, vulnerable) => {
   let score = (bid - made)*50
   if(doubled === 'doubled' || doubled === 'redoubled') {
     return defeatedContractDoubled(whoBid, bid, made, doubled, vulnerable)
+  } else if (whoBid === 'We' && vulnerable) {
+    return ['They', {'below': null, above: score*2}]
+  } else if (whoBid === 'They' && vulnerable) {
+    return ['We', {'below': null, above: score*2}]
   } else if (whoBid === 'We') {
     return ['They', {'below': null, above: score}]
   } else {

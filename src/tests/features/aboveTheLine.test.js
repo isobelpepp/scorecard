@@ -40,3 +40,11 @@ test('Overtricks in CLUBS puts 20 points above the line for each overtrick', () 
   expect(screen.getByTestId('we-below-line')).toHaveTextContent('80');
   expect(screen.getByTestId('we-above-line')).toHaveTextContent('60');
 });
+
+test('Defeated contract, vulnerable gives other pair 100 above the line for each undertrick', () => {
+  bid('we-button', 'hearts', 'five', '11')
+  submit()
+  bid('we-button', 'hearts', 'three', '4')
+  submit()
+  expect(screen.getByTestId('they-above-line')).toHaveTextContent('500');
+});
