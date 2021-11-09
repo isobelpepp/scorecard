@@ -64,19 +64,10 @@ Defeated contracts:
     - Vulnerable ✅
 
 Slam Bonus:
-  - Small slam (not vulnerable) - 500 points
-  - Small slam (vulnerable) - 750 points
-  - Grand slam (not vulnerable) - 1000 points
-  - Grand slam (vulnarable) - 1500 points
-
-(if you have game anyway then it will probably just go below the line)
-- if it takes you into rubber 
-  - Say 7 diamonds 
-  - Put 140 below, put 700 above for rubber in two
-
-- Do the points go above or below the line??
-- Do you get the points even if you haven't bid it?
-- As soon as someone gets 2 games is it over - do you start a new scoresheet??
+  - Small slam (not vulnerable) - 500 points ✅
+  - Small slam (vulnerable) - 750 points ✅
+  - Grand slam (not vulnerable) - 1000 points ✅
+  - Grand slam (vulnarable) - 1500 points ✅
 
 Doubled/Redoubled Bonus:
   - Made contract doubled (50 points)

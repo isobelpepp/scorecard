@@ -15,7 +15,36 @@ class Scoring {
       this.whoBid === 'We' ? this.whoBid = 'They' : this.whoBid = 'We'
       this.defeatedContract(numberBid, numberMade, isDoubled, vulnerable)
     }
+    this.slamBonus(numberBid, numberMade, vulnerable)
     return this.finalScore()
+  }
+
+  slamBonus(bid, made, vulnerable) {
+    if(bid < 6 || made < bid) {
+      return
+    } else if(vulnerable) {
+      if(this.smallSlam(bid, made)) {
+        this.aboveScore += 750
+      } else if(this.grandSlam(bid, made)) {
+        this.aboveScore += 1500
+      }
+    } else if(this.smallSlam(bid, made)) {
+      this.aboveScore += 500
+    } else {
+      this.aboveScore += 1000
+    }
+  }
+
+  smallSlam(bid, made) {
+    if(made >= 6 && bid === 6) {
+      return true
+    } 
+  }
+
+  grandSlam(bid, made) {
+    if(made === 7 && bid === 7) {
+      return true
+    } 
   }
 
   bidAndMade(suitBid, numberBid, isDoubled) {

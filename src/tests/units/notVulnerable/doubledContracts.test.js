@@ -38,7 +38,7 @@ describe('Doubled contracts - underbid, not vulnerable', () => {
   });
   it('doubles the score for Minor suits and adds 100 above for every overtrick', () => {
     let diamondsScore = score.scoring('They', 'Diamonds', 2, 3, 'doubled')
-    let clubsScore = score.scoring('They', 'Clubs', 6, 7, 'doubled')
+    let clubsScore = score.scoring('They', 'Clubs', 5, 6, 'doubled')
     expect(diamondsScore[1]).toEqual({'below': 80, 'above': 100})
     expect(clubsScore[1]['above']).toEqual(100)
   });
