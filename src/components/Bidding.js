@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-const scoring = require('./Scoring');
+const Scoring = require('./Scoring');
 
 export const Bidding = (props) => {
   const [whoBid, setWhoBid] = useState('');
@@ -36,32 +36,41 @@ export const Bidding = (props) => {
   }
 
   const handleSubmit = (event) => {
+    let calculateScore = new Scoring()
     event.preventDefault()
     let numberMade = parseInt(tricks) - 6
     if(doubled) {
-      if((whoBid === 'We' && props.weGames >= 1) || (whoBid === 'They' && props.theyGames >= 1)) {
-        let score = scoring(whoBid, suit, number, numberMade, 'doubled', true)
+      if(vulnerable()) {
+        let score = calculateScore.scoring(whoBid, suit, number, numberMade, 'doubled', true)
         props.submit(score[0], score[1]['below'], score[1]['above'])
       } else {
-        let score = scoring(whoBid, suit, number, numberMade, 'doubled')
+        let score = calculateScore.scoring(whoBid, suit, number, numberMade, 'doubled')
         props.submit(score[0], score[1]['below'], score[1]['above'])
       }
     } else if (redoubled) {
-      if((whoBid === 'We' && props.weGames >= 1) || (whoBid === 'They' && props.theyGames >= 1)) {
-        let score = scoring(whoBid, suit, number, numberMade, 'redoubled', true)
+      if(vulnerable()) {
+        let score = calculateScore.scoring(whoBid, suit, number, numberMade, 'redoubled', true)
         props.submit(score[0], score[1]['below'], score[1]['above'])
       } else {
-        let score = scoring(whoBid, suit, number, numberMade, 'redoubled')
+        let score = calculateScore.scoring(whoBid, suit, number, numberMade, 'redoubled')
         props.submit(score[0], score[1]['below'], score[1]['above'])
       }
-    } else if ((whoBid === 'We' && props.weGames >= 1) || (whoBid === 'They' && props.theyGames >= 1)) {
-      let score = scoring(whoBid, suit, number, numberMade, false, true)
+    } else if (vulnerable()) {
+      let score = calculateScore.scoring(whoBid, suit, number, numberMade, false, true)
       props.submit(score[0], score[1]['below'], score[1]['above'])
     } else {
-      let score = scoring(whoBid, suit, number, numberMade, false)
+      let score = calculateScore.scoring(whoBid, suit, number, numberMade, false)
       props.submit(score[0], score[1]['below'], score[1]['above'])
     }
     reset()
+  }
+
+  const vulnerable = () => {
+    if((whoBid === 'We' && props.weGames >= 1) || (whoBid === 'They' && props.theyGames >= 1)) {
+      return true
+    } else {
+      return false
+    }
   }
 
   const reset = () => {

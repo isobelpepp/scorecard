@@ -2,6 +2,8 @@
 
 A simple one-page web app to help users keep track of their score in Bridge. I have played Bridge for years and have always found the scoring element of it extremely confusing. This app solves that problem and does it for you!
 
+Visit this website for a breakdown of scoring in Bridge: https://u3asites.org.uk/files/b/bnb/docs/bridgescoring.pdf
+
 ## User Stories
 
 ```
@@ -51,9 +53,9 @@ Overtricks (above the line): ✅
     - Vulnerable  ✅
 
 Defeated contracts:
-  - Undoubled
+  - Undoubled ✅
     - Not vulnerable ✅
-    - Vulnerable 
+    - Vulnerable ✅
   - Doubled ✅
     - Not vulnerable ✅
     - Vulnerable ✅
