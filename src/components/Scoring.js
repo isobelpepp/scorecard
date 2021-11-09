@@ -16,35 +16,8 @@ class Scoring {
       this.defeatedContract(numberBid, numberMade, isDoubled, vulnerable)
     }
     this.slamBonus(numberBid, numberMade, vulnerable)
+    this.doubledBonus(numberBid, numberMade, isDoubled)
     return this.finalScore()
-  }
-
-  slamBonus(bid, made, vulnerable) {
-    if(bid < 6 || made < bid) {
-      return
-    } else if(vulnerable) {
-      if(this.smallSlam(bid, made)) {
-        this.aboveScore += 750
-      } else if(this.grandSlam(bid, made)) {
-        this.aboveScore += 1500
-      }
-    } else if(this.smallSlam(bid, made)) {
-      this.aboveScore += 500
-    } else {
-      this.aboveScore += 1000
-    }
-  }
-
-  smallSlam(bid, made) {
-    if(made >= 6 && bid === 6) {
-      return true
-    } 
-  }
-
-  grandSlam(bid, made) {
-    if(made === 7 && bid === 7) {
-      return true
-    } 
   }
 
   bidAndMade(suitBid, numberBid, isDoubled) {
@@ -137,6 +110,44 @@ defeatedContractDoubled(bid, made, doubled, vulnerable) {
 
   finalScore() {
     return [this.whoBid, {below: this.belowScore, above: this.aboveScore}]
+  }
+
+  slamBonus(bid, made, vulnerable) {
+    if(bid < 6 || made < bid) {
+      return
+    } else if(vulnerable) {
+      if(this.smallSlam(bid, made)) {
+        this.aboveScore += 750
+      } else if(this.grandSlam(bid, made)) {
+        this.aboveScore += 1500
+      }
+    } else if(this.smallSlam(bid, made)) {
+      this.aboveScore += 500
+    } else {
+      this.aboveScore += 1000
+    }
+  }
+
+  smallSlam(bid, made) {
+    if(made >= 6 && bid === 6) {
+      return true
+    } 
+  }
+
+  grandSlam(bid, made) {
+    if(made === 7 && bid === 7) {
+      return true
+    } 
+  }
+
+  doubledBonus(bid, made, doubled) {
+    if(made >= bid) {
+      if(doubled === 'doubled') {
+        this.aboveScore += 50
+      } else if(doubled === 'redoubled') {
+        this.aboveScore += 100
+      }
+    }
   }
 }
 

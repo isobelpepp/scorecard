@@ -22,8 +22,8 @@ describe('Grand slam', () => {
     let slamScore = score.scoring('We', 'Clubs', 7, 7)
     expect(slamScore[1]).toEqual({below: 140, above: 1000})
   });
-  it('scores 1500 above the line for 13 tricks bid and made VULNERABLE', () => {
+  it('scores 1500 above the line for 13 tricks bid and made VULNERABLE and 50 for being doubled', () => {
     let slamScore = score.scoring('We', 'Hearts', 7, 7, 'doubled', true)
-    expect(slamScore).toEqual(['We', {below: 420, above: 1500}])
+    expect(slamScore).toEqual(['We', {below: 420, above: 1550}])
   });
 });

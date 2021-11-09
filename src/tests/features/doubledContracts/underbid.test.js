@@ -14,21 +14,21 @@ describe('Doubled, underbid, NOT vulnerable awards 100 points above the line for
     doubled()
     submit()
     expect(screen.getByTestId('they-below-line')).toHaveTextContent('200');
-    expect(screen.getByTestId('they-above-line')).toHaveTextContent('200');
+    expect(screen.getByTestId('they-above-line')).toHaveTextContent('250');
   });
   test('Major suit', () => {
     bid('we-button', 'hearts', 'three', '11')
     doubled()
     submit()
     expect(screen.getByTestId('we-below-line')).toHaveTextContent('180');
-    expect(screen.getByTestId('we-above-line')).toHaveTextContent('200');
+    expect(screen.getByTestId('we-above-line')).toHaveTextContent('250');
   });
   test('Minor suit', () => {
     bid('we-button', 'clubs', 'two', '9')
     doubled()
     submit()
     expect(screen.getByTestId('we-below-line')).toHaveTextContent('80');
-    expect(screen.getByTestId('we-above-line')).toHaveTextContent('100');
+    expect(screen.getByTestId('we-above-line')).toHaveTextContent('150');
   });
 });
 
@@ -39,7 +39,7 @@ describe('Doubled, underbid, VULNERABLE gives 200 points above the line for ever
     bid('they-button', 'no-trumps', 'one', '11')
     doubled()
     submit()
-    expect(screen.getByTestId('they-above-line')).toHaveTextContent('800');
+    expect(screen.getByTestId('they-above-line')).toHaveTextContent('850');
   });
   test('Major suit', () => {
     bid('we-button', 'hearts', 'five', '11')
@@ -47,7 +47,7 @@ describe('Doubled, underbid, VULNERABLE gives 200 points above the line for ever
     bid('we-button', 'hearts', 'two', '10')
     doubled()
     submit()
-    expect(screen.getByTestId('we-above-line')).toHaveTextContent('400');
+    expect(screen.getByTestId('we-above-line')).toHaveTextContent('450');
   });
   test('Minor suit', () => {
     bid('we-button', 'hearts', 'five', '11')
@@ -55,6 +55,6 @@ describe('Doubled, underbid, VULNERABLE gives 200 points above the line for ever
     bid('we-button', 'diamonds', 'three', '10')
     doubled()
     submit()
-    expect(screen.getByTestId('we-above-line')).toHaveTextContent('200');
+    expect(screen.getByTestId('we-above-line')).toHaveTextContent('250');
   });
 });

@@ -9,19 +9,19 @@ beforeEach(() => {
 describe('Doubled contracts - underbid, VULNERABLE', () => {
   it('doubles score for NT and adds 200 for every overtrick made', () => {
   let NTscore = score.scoring('They', 'NT', 5, 7, 'doubled', true)
-  expect(NTscore[1]).toEqual({'below': 320, 'above': 400})
+  expect(NTscore[1]).toEqual({'below': 320, 'above': 450})
   });
   it('doubles the score for Major suits and adds 200 for every overtrick made', () => {
     let heartsScore = score.scoring('They', 'Hearts', 3, 5, 'doubled', true)
     let spadesScore = score.scoring('They', 'Spades', 2, 6, 'doubled', true)
-    expect(heartsScore[1]).toEqual({'below': 180, 'above': 400})
-    expect(spadesScore[1]).toEqual({'below': 120, 'above': 800})
+    expect(heartsScore[1]).toEqual({'below': 180, 'above': 450})
+    expect(spadesScore[1]).toEqual({'below': 120, 'above': 850})
   });
   it('doubles the score for Minor suits and adds 200 above for every overtrick', () => {
     let diamondsScore = score.scoring('They', 'Diamonds', 2, 3, 'doubled', true)
     let clubsScore = score.scoring('They', 'Clubs', 1, 7, 'doubled', true)
-    expect(diamondsScore[1]).toEqual({'below': 80, 'above': 200})
-    expect(clubsScore[1]).toEqual({'below': 40, 'above': 1200})
+    expect(diamondsScore[1]).toEqual({'below': 80, 'above': 250})
+    expect(clubsScore[1]).toEqual({'below': 40, 'above': 1250})
   });
 });
 
