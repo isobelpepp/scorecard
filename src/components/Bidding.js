@@ -10,7 +10,7 @@ export const Bidding = (props) => {
   const [tricks, setTricks] = useState(0);
   const [doubled, setDoubled] = useState(false)
   const [redoubled, setRedoubled] = useState(false)
-  // const [honours, setHonours] = useState('')
+  const [honours, setHonours] = useState('')
 
   let calculateScore = new Scoring()
   
@@ -46,9 +46,14 @@ export const Bidding = (props) => {
     setTricks(event.target.value);
   }
 
-  const handleHonours = (honours) => (event) => {
+  const handleHonours = (addHonours) => (event) => {
     event.preventDefault()
-    calculateScore.honours(honours)
+    if((honours === '4/5' && addHonours === '4/5') || (honours === 'full honours' && addHonours === 'full honours')) {
+      setHonours('')
+    } else {
+      setHonours(addHonours)
+    }
+    
   }
 
   const handleSubmit = (event) => {
@@ -82,6 +87,7 @@ export const Bidding = (props) => {
     setTricks(0)
     setDoubled(false)
     setRedoubled(false)
+    setHonours('')
     calculateScore = new Scoring()
   }
 
@@ -112,7 +118,7 @@ export const Bidding = (props) => {
       <p>{suit !== '' && number !== 0 ? number + ' ' + suit : null}</p>
       <p> { doubled ? 'Doubled' : null} </p>
       <p> { redoubled ? 'Redoubled' : null} </p>
-      {/* <p> {honours !== '' ? honours : null}</p> */}
+      <p> {honours !== '' ? honours : null}</p>
 
       <h4>Tricks won:</h4>
       <form data-testid='result' onSubmit={handleSubmit}>
