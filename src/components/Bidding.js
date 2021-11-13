@@ -10,7 +10,7 @@ export const Bidding = (props) => {
   const [tricks, setTricks] = useState(0);
   const [doubled, setDoubled] = useState(false)
   const [redoubled, setRedoubled] = useState(false)
-  const [honours, setHonours] = useState('')
+  // const [honours, setHonours] = useState('')
 
   let calculateScore = new Scoring()
   
@@ -19,11 +19,19 @@ export const Bidding = (props) => {
     if(bid === 'We' || bid === 'They') {
       setWhoBid(bid)
     } else if (bid === 'Doubled'){
-      setDoubled(true)
-      setRedoubled(false)
+      if(doubled) {
+        setDoubled(false)
+      } else {
+        setDoubled(true)
+        setRedoubled(false)
+      }
     } else if (bid === 'Redoubled') {
-      setRedoubled(true)
-      setDoubled(false)
+      if(redoubled) {
+        setRedoubled(false)
+      } else {
+        setRedoubled(true)
+        setDoubled(false)
+      }
     } else {
       setSuit(bid)
     }
@@ -40,39 +48,22 @@ export const Bidding = (props) => {
 
   const handleHonours = (honours) => (event) => {
     event.preventDefault()
-    setHonours(honours)
+    calculateScore.honours(honours)
   }
 
   const handleSubmit = (event) => {
-    // let calculateScore = new Scoring()
     event.preventDefault()
     let numberMade = parseInt(tricks) - 6
-    if(honours != '') {
-      let score = calculateScore.honours(honours)
-    }
     if(doubled) {
-      if(vulnerable()) {
-        let score = calculateScore.scoring(whoBid, suit, number, numberMade, 'doubled', true)
-        props.submit(score[0], score[1]['below'], score[1]['above'])
-      } else {
-        let score = calculateScore.scoring(whoBid, suit, number, numberMade, 'doubled')
-        props.submit(score[0], score[1]['below'], score[1]['above'])
-      }
+      calculateScore.isDoubled()
     } else if (redoubled) {
-      if(vulnerable()) {
-        let score = calculateScore.scoring(whoBid, suit, number, numberMade, 'redoubled', true)
-        props.submit(score[0], score[1]['below'], score[1]['above'])
-      } else {
-        let score = calculateScore.scoring(whoBid, suit, number, numberMade, 'redoubled')
-        props.submit(score[0], score[1]['below'], score[1]['above'])
-      }
-    } else if (vulnerable()) {
-      let score = calculateScore.scoring(whoBid, suit, number, numberMade, false, true)
-      props.submit(score[0], score[1]['below'], score[1]['above'])
-    } else {
-      let score = calculateScore.scoring(whoBid, suit, number, numberMade, false)
-      props.submit(score[0], score[1]['below'], score[1]['above'])
+      calculateScore.isRedoubled()
     }
+    if(vulnerable()){
+      calculateScore.isVulnerable()
+    }
+    let score = calculateScore.scoring(whoBid, suit, number, numberMade)
+    props.submit(score[0], score[1]['below'], score[1]['above'])
     reset()
   }
 
@@ -121,7 +112,7 @@ export const Bidding = (props) => {
       <p>{suit !== '' && number !== 0 ? number + ' ' + suit : null}</p>
       <p> { doubled ? 'Doubled' : null} </p>
       <p> { redoubled ? 'Redoubled' : null} </p>
-      <p> {honours !== '' ? honours : null}</p>
+      {/* <p> {honours !== '' ? honours : null}</p> */}
 
       <h4>Tricks won:</h4>
       <form data-testid='result' onSubmit={handleSubmit}>

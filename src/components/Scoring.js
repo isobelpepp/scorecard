@@ -4,31 +4,33 @@ class Scoring {
     this.belowScore = 0
     this.aboveScore = 0
     this.whoBid = ''
+    this.doubled = false
+    this.redoubled = false
+    this.vulnerable = false
   }
 
-  scoring(whoBid, suitBid, numberBid, numberMade, isDoubled, vulnerable, honours) {
+  scoring(whoBid, suitBid, numberBid, numberMade) {
     this.whoBid = whoBid
     if(numberBid <= numberMade) {
-      this.bidAndMade(suitBid, numberBid, isDoubled)
-      this.overtricks(suitBid, numberBid, numberMade, isDoubled, vulnerable)
+      this.bidAndMade(suitBid, numberBid)
+      this.overtricks(suitBid, numberBid, numberMade)
     } else {
       this.whoBid === 'We' ? this.whoBid = 'They' : this.whoBid = 'We'
-      this.defeatedContract(numberBid, numberMade, isDoubled, vulnerable)
+      this.defeatedContract(numberBid, numberMade)
     }
-    this.slamBonus(numberBid, numberMade, vulnerable)
-    this.doubledBonus(numberBid, numberMade, isDoubled)
-    this.honours(honours)
+    this.slamBonus(numberBid, numberMade)
+    this.doubledBonus(numberBid, numberMade)
     return this.finalScore()
   }
 
-  bidAndMade(suitBid, numberBid, isDoubled) {
-    this.belowScore = this.calculateScoreBelow(suitBid, numberBid, isDoubled)
+  bidAndMade(suitBid, numberBid) {
+    this.belowScore = this.calculateScoreBelow(suitBid, numberBid)
   }
 
-  calculateScoreBelow(chosenSuit, bid, isDoubled) {
-    if(isDoubled === 'doubled') {
+  calculateScoreBelow(chosenSuit, bid) {
+    if(this.doubled) {
       return (this.bidAndMadeScore(chosenSuit, bid))*2
-    } else if (isDoubled === 'redoubled') {
+    } else if (this.redoubled) {
       return (this.bidAndMadeScore(chosenSuit, bid))*4
     } else {
       return this.bidAndMadeScore(chosenSuit, bid)
@@ -45,19 +47,19 @@ class Scoring {
     }
   }
 
-  overtricks(suitBid, bid, made, doubled, vulnerable) {
-    if((doubled === 'doubled' && vulnerable) || doubled === 'redoubled' && !vulnerable) {
-      this.aboveScore += this.calculateScoreAbove(suitBid, bid, made, doubled)*2
-    } else if (doubled === 'redoubled') {
-      this.aboveScore += this.calculateScoreAbove(suitBid, bid, made, doubled)*4
+  overtricks(suitBid, bid, made) {
+    if((this.doubled && this.vulnerable) || this.redoubled && !this.vulnerable) {
+      this.aboveScore += this.calculateScoreAbove(suitBid, bid, made)*2
+    } else if (this.redoubled) {
+      this.aboveScore += this.calculateScoreAbove(suitBid, bid, made)*4
     } else {
-      this.aboveScore += this.calculateScoreAbove(suitBid, bid, made, doubled)
+      this.aboveScore += this.calculateScoreAbove(suitBid, bid, made)
     }
   }
 
-  calculateScoreAbove(suitBid, bid, made, doubled) {
+  calculateScoreAbove(suitBid, bid, made) {
     let overtricks = made - bid
-    if(doubled === 'doubled' || doubled === 'redoubled') {
+    if(this.doubled|| this.redoubled) {
       return overtricks*100
     } else if (suitBid === 'NT' || this.suit(suitBid) === 'Major') {
       return overtricks*30
@@ -74,27 +76,27 @@ class Scoring {
     }
   }
 
-  defeatedContract(bid, made, doubled, vulnerable){
+  defeatedContract(bid, made){
     let score = (bid - made)*50
-    if(doubled === 'doubled' || doubled === 'redoubled') {
-      this.aboveScore += this.defeatedContractDoubled(bid, made, doubled, vulnerable)
-    } else if (vulnerable) {
+    if(this.doubled || this.redoubled) {
+      this.aboveScore += this.defeatedContractDoubled(bid, made)
+    } else if (this.vulnerable) {
       this.aboveScore += score*2
     } else {
       this.aboveScore += score
     }
   }
 
-defeatedContractDoubled(bid, made, doubled, vulnerable) {
-  if(doubled === 'doubled') {
-    return this.addScore(bid, made, vulnerable)
+defeatedContractDoubled(bid, made) {
+  if(this.doubled) {
+    return this.addScore(bid, made)
   } else {
-    return (this.addScore(bid, made, vulnerable))*2
+    return (this.addScore(bid, made))*2
   }
 }
   
-  addScore(bid, made, vulnerable) {
-    if(vulnerable) {
+  addScore(bid, made) {
+    if(this.vulnerable) {
       let score = 0
       for (let i = 0; i < bid - made; i++) {
         i === 0 ? score += 200 : score += 300
@@ -113,10 +115,10 @@ defeatedContractDoubled(bid, made, doubled, vulnerable) {
     return [this.whoBid, {below: this.belowScore, above: this.aboveScore}]
   }
 
-  slamBonus(bid, made, vulnerable) {
+  slamBonus(bid, made) {
     if(bid < 6 || made < bid) {
       return
-    } else if(vulnerable) {
+    } else if(this.vulnerable) {
       if(this.smallSlam(bid, made)) {
         this.aboveScore += 750
       } else if(this.grandSlam(bid, made)) {
@@ -141,11 +143,11 @@ defeatedContractDoubled(bid, made, doubled, vulnerable) {
     } 
   }
 
-  doubledBonus(bid, made, doubled) {
+  doubledBonus(bid, made) {
     if(made >= bid) {
-      if(doubled === 'doubled') {
+      if(this.doubled) {
         this.aboveScore += 50
-      } else if(doubled === 'redoubled') {
+      } else if(this.redoubled) {
         this.aboveScore += 100
       }
     }
@@ -157,6 +159,18 @@ defeatedContractDoubled(bid, made, doubled, vulnerable) {
     } else if(honours === 'full honours') {
       this.aboveScore += 150
     }
+  }
+
+  isDoubled() {
+    this.doubled = true
+  }
+
+  isRedoubled() {
+    this.redoubled = true
+  }
+
+  isVulnerable() {
+    this.vulnerable = true
   }
 }
 
