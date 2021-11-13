@@ -10,8 +10,11 @@ export const Bidding = (props) => {
   const [tricks, setTricks] = useState(0);
   const [doubled, setDoubled] = useState(false)
   const [redoubled, setRedoubled] = useState(false)
+  const [honours, setHonours] = useState('')
+
+  let calculateScore = new Scoring()
   
-  const handleClick = (bid) =>  (event) => {
+  const handleClick = (bid) => (event) => {
     event.preventDefault()
     if(bid === 'We' || bid === 'They') {
       setWhoBid(bid)
@@ -35,10 +38,18 @@ export const Bidding = (props) => {
     setTricks(event.target.value);
   }
 
+  const handleHonours = (honours) => (event) => {
+    event.preventDefault()
+    setHonours(honours)
+  }
+
   const handleSubmit = (event) => {
-    let calculateScore = new Scoring()
+    // let calculateScore = new Scoring()
     event.preventDefault()
     let numberMade = parseInt(tricks) - 6
+    if(honours != '') {
+      let score = calculateScore.honours(honours)
+    }
     if(doubled) {
       if(vulnerable()) {
         let score = calculateScore.scoring(whoBid, suit, number, numberMade, 'doubled', true)
@@ -80,6 +91,7 @@ export const Bidding = (props) => {
     setTricks(0)
     setDoubled(false)
     setRedoubled(false)
+    calculateScore = new Scoring()
   }
 
   return (
@@ -102,9 +114,14 @@ export const Bidding = (props) => {
       <button onClick={handleClick('Doubled')} data-testid='doubled'>Doubled</button>
       <button onClick={handleClick('Redoubled')} data-testid='redoubled'>Redoubled</button>
 
+      <h2>Honours:</h2>
+      <button onClick={handleHonours('4/5')} data-testid='small-honours'>4/5</button>
+      <button onClick={handleHonours('full honours')} data-testid='full-honours'>Full Honours</button>
+
       <p>{suit !== '' && number !== 0 ? number + ' ' + suit : null}</p>
       <p> { doubled ? 'Doubled' : null} </p>
       <p> { redoubled ? 'Redoubled' : null} </p>
+      <p> {honours !== '' ? honours : null}</p>
 
       <h4>Tricks won:</h4>
       <form data-testid='result' onSubmit={handleSubmit}>

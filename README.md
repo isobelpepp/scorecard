@@ -70,8 +70,8 @@ Slam Bonus:
   - Grand slam (vulnarable) - 1500 points ✅
 
 Doubled/Redoubled Bonus:
-  - Made contract doubled (50 points)
-  - Made contract redoubled (100 points)
+  - Made contract doubled (50 points) ✅
+  - Made contract redoubled (100 points) ✅
 
 Honours Bonus:
   - Four out of five trump suit honours (100 points)

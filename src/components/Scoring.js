@@ -6,7 +6,7 @@ class Scoring {
     this.whoBid = ''
   }
 
-  scoring(whoBid, suitBid, numberBid, numberMade, isDoubled, vulnerable) {
+  scoring(whoBid, suitBid, numberBid, numberMade, isDoubled, vulnerable, honours) {
     this.whoBid = whoBid
     if(numberBid <= numberMade) {
       this.bidAndMade(suitBid, numberBid, isDoubled)
@@ -17,6 +17,7 @@ class Scoring {
     }
     this.slamBonus(numberBid, numberMade, vulnerable)
     this.doubledBonus(numberBid, numberMade, isDoubled)
+    this.honours(honours)
     return this.finalScore()
   }
 
@@ -46,11 +47,11 @@ class Scoring {
 
   overtricks(suitBid, bid, made, doubled, vulnerable) {
     if((doubled === 'doubled' && vulnerable) || doubled === 'redoubled' && !vulnerable) {
-      this.aboveScore = this.calculateScoreAbove(suitBid, bid, made, doubled)*2
+      this.aboveScore += this.calculateScoreAbove(suitBid, bid, made, doubled)*2
     } else if (doubled === 'redoubled') {
-      this.aboveScore = this.calculateScoreAbove(suitBid, bid, made, doubled)*4
+      this.aboveScore += this.calculateScoreAbove(suitBid, bid, made, doubled)*4
     } else {
-      this.aboveScore = this.calculateScoreAbove(suitBid, bid, made, doubled)
+      this.aboveScore += this.calculateScoreAbove(suitBid, bid, made, doubled)
     }
   }
 
@@ -76,11 +77,11 @@ class Scoring {
   defeatedContract(bid, made, doubled, vulnerable){
     let score = (bid - made)*50
     if(doubled === 'doubled' || doubled === 'redoubled') {
-      this.aboveScore = this.defeatedContractDoubled(bid, made, doubled, vulnerable)
+      this.aboveScore += this.defeatedContractDoubled(bid, made, doubled, vulnerable)
     } else if (vulnerable) {
-      this.aboveScore = score*2
+      this.aboveScore += score*2
     } else {
-      this.aboveScore = score
+      this.aboveScore += score
     }
   }
 
@@ -147,6 +148,14 @@ defeatedContractDoubled(bid, made, doubled, vulnerable) {
       } else if(doubled === 'redoubled') {
         this.aboveScore += 100
       }
+    }
+  }
+
+  honours(honours) {
+    if(honours === '4/5'){
+      this.aboveScore += 100
+    } else if(honours === 'full honours') {
+      this.aboveScore += 150
     }
   }
 }
