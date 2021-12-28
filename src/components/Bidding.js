@@ -53,7 +53,6 @@ export const Bidding = (props) => {
     } else {
       setHonours(addHonours)
     }
-    
   }
 
   const handleSubmit = (event) => {
@@ -66,6 +65,9 @@ export const Bidding = (props) => {
     }
     if(vulnerable()){
       calculateScore.isVulnerable()
+    }
+    if(honours !== '') {
+      calculateScore.honours(honours)
     }
     let score = calculateScore.scoring(whoBid, suit, number, numberMade)
     props.submit(score[0], score[1]['below'], score[1]['above'])
